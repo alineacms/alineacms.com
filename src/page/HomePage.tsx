@@ -1,5 +1,7 @@
 import styler from '@alinea/styler'
 import {Query} from 'alinea'
+import {Link as AnyLink} from 'alinea'
+
 import {Icon} from 'alinea/ui/Icon'
 import {IcRoundInsertDriveFile} from 'alinea/ui/icons/IcRoundInsertDriveFile'
 import {IcRoundOpenInNew} from 'alinea/ui/icons/IcRoundOpenInNew'
@@ -36,6 +38,8 @@ import {getMetadata} from '@/utils/metadata'
 import {CodeBlockView} from './blocks/CodeBlockView'
 import {TemplateBlock} from './blocks/TemplateBlock'
 import css from './HomePage.module.scss'
+import {FeaturesBlockView} from '@/page/blocks/FeaturesBlockView'
+import {WebText} from '@/layout/WebText'
 
 const styles = styler(css)
 
@@ -102,30 +106,40 @@ const posts = await cms.find({
 })
 `
 
-export default async function HomePage() {
-  const home = await cms.get({type: Home})
+type HomeHeroProps = {
+  headline: string
+  byline: string
+  button?: AnyLink<{label: string}>
+  link?: AnyLink<{label: string}>
+}
+function HomeHero({headline, byline, button, link}: HomeHeroProps) {
   return (
-    <WebLayout>
-      <main className={styles.home()}>
-        <PageContainer>
-          <div className={styles.hero()}>
-            <NextImage
-              priority
-              fetchPriority="high"
-              src={heroBg.src}
-              placeholder="blur"
-              blurDataURL={heroBg.blurDataURL}
-              sizes="(max-width: 1440px) 100vw, 1280px"
-              fill
-              alt="Background"
-              style={{objectFit: 'cover', zIndex: -1}}
-            />
-            <VStack center>
-              <a href="https://vercel.com/oss" target="_blank" rel="noopener">
-                <img alt="Vercel OSS Program" src={programBadge.src} />
-              </a>
-              <Hero.Title>{home.headline}</Hero.Title>
-              <Hero.ByLine>{home.byline}</Hero.ByLine>
+    <div className={styles.hero()}>
+      <PageContainer>
+        <div className={styles.hero.block()}>
+          <NextImage
+            priority
+            fetchPriority="high"
+            src={heroBg.src}
+            placeholder="blur"
+            blurDataURL={heroBg.blurDataURL}
+            sizes="(max-width: 1440px) 100vw, 1280px"
+            fill
+            alt="Background"
+            style={{objectFit: 'cover', zIndex: -1}}
+          />
+          <VStack center>
+            <a
+              href="https://vercel.com/oss"
+              target="_blank"
+              rel="noopener"
+              className={styles.hero.vercel()}
+            >
+              <img alt="Vercel OSS Program" src={programBadge.src} />
+            </a>
+            {headline && <Hero.Title>{headline}</Hero.Title>}
+            {byline && <Hero.ByLine>{byline}</Hero.ByLine>}
+            {(button?.href || link?.href) && (
               <HStack
                 wrap
                 gap={`${px(16)} ${px(24)}`}
@@ -133,63 +147,60 @@ export default async function HomePage() {
                 style={{paddingTop: px(20)}}
                 justify="center"
               >
-                {home.action?.href && (
-                  <Hero.Action href={home.action.href}>
-                    {home.action.fields.label}
+                {button?.href && (
+                  <Hero.Action href={button.href}>
+                    {button.fields.label || button.title}
                   </Hero.Action>
                 )}
-                <WebTypo.Link
-                  className={styles.hero.demo()}
-                  href="https://alineacms.com/demo"
-                  target="_blank"
-                >
-                  <HStack gap={8} center>
-                    <span>Try a demo</span>
-                    <Icon icon={IcRoundOpenInNew} />
-                  </HStack>
-                </WebTypo.Link>
+                {link?.href && (
+                  <WebTypo.Link className={styles.hero.demo()} {...link}>
+                    <HStack gap={8} center>
+                      <span>Try a demo</span>
+                      {link._type === 'url' && link.target === '_blank' && (
+                        <Icon icon={IcRoundOpenInNew} />
+                      )}
+                    </HStack>
+                  </WebTypo.Link>
+                )}
               </HStack>
-            </VStack>
-          </div>
-        </PageContainer>
+            )}
+          </VStack>
+        </div>
+      </PageContainer>
+    </div>
+  )
+}
+
+export default async function HomePage() {
+  const home = await cms.get({type: Home})
+  const features = [
+    {
+      title: 'Minimal setup',
+      description:
+        'Straightforward content modeling without dealing with databases and migrations.',
+      icon: IcRoundFastForward
+    },
+    {
+      title: 'Git based',
+      description:
+        'Version controlled content in your repository. Easily branch and feature test content changes.',
+      icon: MdiSourceBranch
+    },
+    {
+      title: 'Fully typed',
+      description:
+        'An optimized, type-safe experience for Typescript users without overcomplication.',
+      icon: MdiLanguageTypescript
+    }
+  ]
+  return (
+    <WebLayout>
+      <main className={styles.home()}>
+        <HomeHero {...home?.hero} />
 
         <PageContainer>
           <div className={styles.home.sections()}>
-            <Features>
-              <Feature>
-                <WebTypo>
-                  <Feature.Title icon={IcRoundFastForward}>
-                    Minimal setup
-                  </Feature.Title>
-                  <WebTypo.P>
-                    Straightforward content modeling without{'\n'}dealing with
-                    databases and migrations.
-                  </WebTypo.P>
-                </WebTypo>
-              </Feature>
-              <Feature>
-                <WebTypo>
-                  <Feature.Title icon={MdiSourceBranch}>
-                    Git based
-                  </Feature.Title>
-                  <WebTypo.P>
-                    Version controlled content in your repository.{'\n'}Easily
-                    branch and feature test content changes.
-                  </WebTypo.P>
-                </WebTypo>
-              </Feature>
-              <Feature>
-                <WebTypo>
-                  <Feature.Title icon={MdiLanguageTypescript}>
-                    Fully typed
-                  </Feature.Title>
-                  <WebTypo.P>
-                    An optimized, type-safe experience for Typescript users
-                    without overcomplication.
-                  </WebTypo.P>
-                </WebTypo>
-              </Feature>
-            </Features>
+            <WebText doc={home.body} FeaturesBlock={FeaturesBlockView} />
 
             <TemplateBlock />
 

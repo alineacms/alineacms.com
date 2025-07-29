@@ -1,27 +1,44 @@
 import {Config, Field} from 'alinea'
-import {IcRoundInsertDriveFile} from 'alinea/ui/icons/IcRoundInsertDriveFile'
 import {IcRoundLink} from 'alinea/ui/icons/IcRoundLink'
+import {FeaturesBlock} from './blocks/FeaturesBlock'
 
 export const Home = Config.document('Home', {
   fields: {
     title: Field.text('Title'),
     path: Field.path('Path', {hidden: true}),
     ...Field.tabs(
-      Field.tab('Homepage', {
-        icon: IcRoundInsertDriveFile,
+      Field.tab('Hero', {
         fields: {
-          headline: Field.text('Headline', {multiline: true, required: true}),
-          byline: Field.text('Byline', {multiline: true, required: true}),
-          action: Field.entry('Action', {
+          hero: Field.object('Hero', {
+            inline: true,
             fields: {
-              label: Field.text('Button label')
+              headline: Field.text('Headline', {
+                multiline: true,
+                required: true
+              }),
+              byline: Field.text('Byline', {multiline: true, required: true}),
+              button: Field.link('Button', {
+                width: 0.5,
+                fields: {
+                  label: Field.text('Button label')
+                }
+              }),
+              link: Field.link('Link', {
+                width: 0.5,
+                fields: {
+                  label: Field.text('Link label')
+                }
+              })
             }
-          }),
-          screenshot: Field.image('Screenshot'),
-          introduction: Field.object('Introduction', {
-            fields: {
-              text: Field.richText('Text')
-              // code: CodeVariants
+          })
+        }
+      }),
+      Field.tab('Body', {
+        fields: {
+          body: Field.richText('Body', {
+            searchable: true,
+            schema: {
+              FeaturesBlock
             }
           })
         }

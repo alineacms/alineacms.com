@@ -6,7 +6,18 @@ export const FeaturesBlock = Config.type('Features', {
       schema: {
         FeatureItem: Config.type('Item', {
           fields: {
-            text: Field.richText('Text')
+            icon: Field.select('Icon', {
+              width: 0.25,
+              options: {
+                IcRoundFastForward: 'IcRoundFastForward',
+                MdiSourceBranch: 'MdiSourceBranch',
+                MdiLanguageTypescript: 'MdiLanguageTypescript'
+              }
+            }),
+            title: Field.text('Title', {
+              width: 0.75
+            }),
+            description: Field.richText('Description')
           }
         })
       }
