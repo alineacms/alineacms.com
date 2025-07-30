@@ -1,4 +1,4 @@
-import styler from '@alinea/styler'
+import styler, {Variant} from '@alinea/styler'
 import {RichText, RichTextProps} from 'alinea/ui/RichText'
 import reactStringReplace from 'react-string-replace'
 import css from './WebText.module.scss'
@@ -14,7 +14,9 @@ function Text({children}: {children: string}) {
   ))
 }
 
-export function WebText<T extends {}>(props: RichTextProps<T>) {
+export function WebText<T extends {}>(
+  props: RichTextProps<T> & {listStyle?: Variant<'checkmark'>}
+) {
   return (
     <div className={styles.root()}>
       <RichText
@@ -25,9 +27,9 @@ export function WebText<T extends {}>(props: RichTextProps<T>) {
         h3={WebTypo.H3}
         h4={WebTypo.H4}
         a={WebTypo.Link}
-        ul={<ul className={styles.list()} />}
+        ul={<ul className={styles.list(props.listStyle)} />}
         ol={<ol className={styles.list()} />}
-        li={<li className={styles.listItem()} />}
+        li={<li className={styles.listItem(props.listStyle)} />}
         blockquote={<blockquote className={styles.blockquote()} />}
         {...props}
       />

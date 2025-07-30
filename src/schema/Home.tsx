@@ -1,6 +1,7 @@
 import {Config, Field} from 'alinea'
 import {IcRoundLink} from 'alinea/ui/icons/IcRoundLink'
 import {FeaturesBlock} from './blocks/FeaturesBlock'
+import {TemplateBlock} from './blocks/TemplateBlock'
 
 export const Home = Config.document('Home', {
   fields: {
@@ -38,7 +39,8 @@ export const Home = Config.document('Home', {
           body: Field.richText('Body', {
             searchable: true,
             schema: {
-              FeaturesBlock
+              FeaturesBlock,
+              TemplateBlock
             }
           })
         }

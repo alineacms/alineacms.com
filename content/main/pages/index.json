@@ -81,6 +81,98 @@
           ]
         }
       ]
+    },
+    {
+      "_type": "TemplateBlock",
+      "_id": "30aGHAsnfVeM1QVG7EszUkM2q55",
+      "image": {
+        "_id": "30atwror7UlkraJ5B5gQCJmCRQx",
+        "_type": "image",
+        "_entry": "30atwo31g5bOSNAwqKd1h0H7kQR"
+      },
+      "imagePosition": "left",
+      "title": "Get started with a template",
+      "description": [
+        {
+          "_type": "paragraph",
+          "content": [
+            {
+              "_type": "text",
+              "text": "Vetra is a ready-made template for Alinea built in Next.js."
+            },
+            {
+              "_type": "hardBreak"
+            },
+            {
+              "_type": "text",
+              "text": "Designed to help you get started quickly with a production ready CMS."
+            }
+          ]
+        },
+        {
+          "_type": "bulletList",
+          "content": [
+            {
+              "_type": "listItem",
+              "content": [
+                {
+                  "_type": "paragraph",
+                  "content": [
+                    {
+                      "_type": "text",
+                      "text": "Beautiful blog with archive"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "_type": "listItem",
+              "content": [
+                {
+                  "_type": "paragraph",
+                  "content": [
+                    {
+                      "_type": "text",
+                      "text": "Includes categories and authors"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "_type": "listItem",
+              "content": [
+                {
+                  "_type": "paragraph",
+                  "content": [
+                    {
+                      "_type": "text",
+                      "text": "Built with Next.js and Tailwind CSS"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "button": {
+        "_id": "30aGmywvzhEA5Tj0kQpsWoLHpVl",
+        "_type": "url",
+        "_url": "https://github.com/alineacms/template-vetra",
+        "_title": "",
+        "_target": "_blank",
+        "label": "Check it out on GitHub"
+      },
+      "link": {
+        "_id": "30aGqf7BZ19sUtALjUy0DTgcJNe",
+        "_type": "url",
+        "_url": "https://vetra.alineacms.com",
+        "_title": "",
+        "_target": "_blank",
+        "label": "See the demo"
+      }
     }
   ],
   "links": [

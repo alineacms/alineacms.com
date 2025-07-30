@@ -1,6 +1,8 @@
+import {IcRoundViewModule} from '@/layout/icons/IcRoundViewModule'
 import {Config, Field} from 'alinea'
 
 export const FeaturesBlock = Config.type('Features', {
+  icon: IcRoundViewModule,
   fields: {
     items: Field.list('Items', {
       schema: {

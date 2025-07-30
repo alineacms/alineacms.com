@@ -47,9 +47,26 @@ export namespace Hero {
   export function Action({
     children,
     href,
+    target,
     outline,
     ...props
-  }: PropsWithChildren<LinkProps & {outline?: boolean}>) {
+  }: PropsWithChildren<LinkProps & {target?: string; outline?: boolean}>) {
+    {
+      ;[
+        '_entry',
+        '_id',
+        '_index',
+        '_target',
+        '_title',
+        '_type',
+        '_url',
+        'entryId',
+        'entryType',
+        'path',
+        'url'
+      ].forEach(key => delete (props as any)[key])
+    }
+
     return (
       <Link
         {...props}

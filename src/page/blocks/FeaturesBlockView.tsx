@@ -36,7 +36,7 @@ function getIcon(iconName: FeatureItem['icon']) {
 export function FeaturesBlockView({items}: Infer<typeof FeaturesBlock>) {
   if (!items || items.length === 0) return null
   return (
-    <div className={styles.root()}>
+    <section className={styles.root()}>
       <Features>
         {items.map((feature, index) => (
           <Feature key={index}>
@@ -49,6 +49,6 @@ export function FeaturesBlockView({items}: Infer<typeof FeaturesBlock>) {
           </Feature>
         ))}
       </Features>
-    </div>
+    </section>
   )
 }

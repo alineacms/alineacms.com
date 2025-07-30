@@ -14,6 +14,23 @@ export type ButtonProps = PropsWithChildren<LinkProps> & {
 }
 
 export function Button({children, icon, iconRight, ...props}: ButtonProps) {
+  {
+    ;[
+      '_entry',
+      '_id',
+      '_index',
+      '_target',
+      '_title',
+      '_type',
+      '_url',
+      'entryId',
+      'entryType',
+      'fields',
+      'path',
+      'url'
+    ].forEach(key => delete (props as any)[key])
+  }
+
   return (
     <Link {...props} className={styles.root.mergeProps(props)()}>
       <HStack center gap={8}>

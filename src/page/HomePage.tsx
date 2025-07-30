@@ -1,7 +1,6 @@
 import styler from '@alinea/styler'
+import type {Link as AnyLink} from 'alinea'
 import {Query} from 'alinea'
-import {Link as AnyLink} from 'alinea'
-
 import {Icon} from 'alinea/ui/Icon'
 import {IcRoundInsertDriveFile} from 'alinea/ui/icons/IcRoundInsertDriveFile'
 import {IcRoundOpenInNew} from 'alinea/ui/icons/IcRoundOpenInNew'
@@ -21,25 +20,22 @@ import {cms} from '@/cms'
 import {
   IcBaselineCloudQueue,
   IcBaselineDashboardCustomize,
-  IcBaselineWorkspaces,
-  IcRoundFastForward,
-  MdiLanguageTypescript,
-  MdiSourceBranch
+  IcBaselineWorkspaces
 } from '@/icons'
 import {Feature, Features} from '@/layout/Features'
 import {Hero} from '@/layout/Hero'
-import {Image} from '@/layout/Image'
+import {StaticImage} from '@/layout/Image'
 import {Link} from '@/layout/nav/Link'
 import {PageContainer} from '@/layout/Page'
 import WebLayout from '@/layout/WebLayout'
+import {WebText} from '@/layout/WebText'
 import {WebTypo} from '@/layout/WebTypo'
+import {CodeBlockView} from '@/page/blocks/CodeBlockView'
+import {FeaturesBlockView} from '@/page/blocks/FeaturesBlockView'
+import {TemplateBlockView} from '@/page/blocks/TemplateBlock'
 import {Home} from '@/schema/Home'
 import {getMetadata} from '@/utils/metadata'
-import {CodeBlockView} from './blocks/CodeBlockView'
-import {TemplateBlock} from './blocks/TemplateBlock'
 import css from './HomePage.module.scss'
-import {FeaturesBlockView} from '@/page/blocks/FeaturesBlockView'
-import {WebText} from '@/layout/WebText'
 
 const styles = styler(css)
 
@@ -106,6 +102,10 @@ const posts = await cms.find({
 })
 `
 
+function isUrlLink(link: AnyLink<{label: string}>) {
+  return link._type === 'url'
+}
+
 type HomeHeroProps = {
   headline: string
   byline: string
@@ -148,15 +148,19 @@ function HomeHero({headline, byline, button, link}: HomeHeroProps) {
                 justify="center"
               >
                 {button?.href && (
-                  <Hero.Action href={button.href}>
+                  <Hero.Action {...button}>
                     {button.fields.label || button.title}
                   </Hero.Action>
                 )}
                 {link?.href && (
-                  <WebTypo.Link className={styles.hero.demo()} {...link}>
+                  <WebTypo.Link
+                    href={link.href}
+                    target={isUrlLink(link) ? link.target : undefined}
+                    className={styles.hero.demo()}
+                  >
                     <HStack gap={8} center>
                       <span>Try a demo</span>
-                      {link._type === 'url' && link.target === '_blank' && (
+                      {isUrlLink(link) && link.target === '_blank' && (
                         <Icon icon={IcRoundOpenInNew} />
                       )}
                     </HStack>
@@ -173,26 +177,7 @@ function HomeHero({headline, byline, button, link}: HomeHeroProps) {
 
 export default async function HomePage() {
   const home = await cms.get({type: Home})
-  const features = [
-    {
-      title: 'Minimal setup',
-      description:
-        'Straightforward content modeling without dealing with databases and migrations.',
-      icon: IcRoundFastForward
-    },
-    {
-      title: 'Git based',
-      description:
-        'Version controlled content in your repository. Easily branch and feature test content changes.',
-      icon: MdiSourceBranch
-    },
-    {
-      title: 'Fully typed',
-      description:
-        'An optimized, type-safe experience for Typescript users without overcomplication.',
-      icon: MdiLanguageTypescript
-    }
-  ]
+
   return (
     <WebLayout>
       <main className={styles.home()}>
@@ -200,9 +185,11 @@ export default async function HomePage() {
 
         <PageContainer>
           <div className={styles.home.sections()}>
-            <WebText doc={home.body} FeaturesBlock={FeaturesBlockView} />
-
-            <TemplateBlock />
+            <WebText
+              doc={home.body}
+              FeaturesBlock={FeaturesBlockView}
+              TemplateBlock={TemplateBlockView}
+            />
 
             <section className={styles.home.section()}>
               <WebTypo>
@@ -218,9 +205,9 @@ export default async function HomePage() {
               </WebTypo>
 
               <div className={styles.home.section.illustration()}>
-                <Image
-                  alt="Alinea dashboard screenshot"
+                <StaticImage
                   {...screenshot2}
+                  alt="Alinea dashboard screenshot"
                   placeholder="blur"
                   sizes="50vw"
                   className={styles.home.section.screenshot()}
@@ -265,9 +252,9 @@ export default async function HomePage() {
               </WebTypo>
 
               <div className={styles.home.section.illustration()}>
-                <Image
-                  alt="Alinea content tree screenshot"
+                <StaticImage
                   {...screenshot}
+                  alt="Alinea content tree screenshot"
                   sizes="50vw"
                   className={styles.home.section.screenshot()}
                 />
