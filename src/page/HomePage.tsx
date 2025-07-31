@@ -14,8 +14,6 @@ import NextImage from 'next/image.js'
 import type {ComponentType, PropsWithChildren, SVGProps} from 'react'
 import heroBg from '@/assets/hero-alinea.jpg'
 import programBadge from '@/assets/program-badge.svg'
-import screenshot from '@/assets/screenshot.png'
-import screenshot2 from '@/assets/screenshot2.png'
 import {cms} from '@/cms'
 import {
   IcBaselineCloudQueue,
@@ -24,17 +22,17 @@ import {
 } from '@/icons'
 import {Feature, Features} from '@/layout/Features'
 import {Hero} from '@/layout/Hero'
-import {StaticImage} from '@/layout/Image'
 import {Link} from '@/layout/nav/Link'
 import {PageContainer} from '@/layout/Page'
 import WebLayout from '@/layout/WebLayout'
 import {WebText} from '@/layout/WebText'
 import {WebTypo} from '@/layout/WebTypo'
-import {CodeBlockView} from '@/page/blocks/CodeBlockView'
 import {FeaturesBlockView} from '@/page/blocks/FeaturesBlockView'
+import {ImageTextBlockView} from '@/page/blocks/ImageTextBlockView'
 import {TemplateBlockView} from '@/page/blocks/TemplateBlock'
 import {Home} from '@/schema/Home'
 import {getMetadata} from '@/utils/metadata'
+import {CodeTextBlockView} from './blocks/CodeTextBlockView'
 import css from './HomePage.module.scss'
 
 const styles = styler(css)
@@ -55,7 +53,6 @@ interface HighlightProps {
   icon: ComponentType
   href: string
 }
-
 function Highlight({
   href,
   icon: Icon,
@@ -70,37 +67,6 @@ function Highlight({
     </Link>
   )
 }
-
-const schemaExample = `
-// Configure a CMS within minutes
-
-const BlogPost = Config.document('Blog post', {
-  fields: {
-    title: Field.text('Title'),
-    body: Field.richText('Body text')
-  }
-})
-
-const Blog = Config.document('Blog', {
-  contains: [BlogPost]
-})
-
-const cms = createCMS({schema: {Blog, BlogPost}})
-`
-
-const queryExample = `
-// Query content within React components
-
-const blog = await cms.get({
-  type: Blog
-})
-
-const posts = await cms.find({
-  type: BlogPost,
-  select: {title: BlogPost.title, body: BlogPost.body}
-  // ... filter, sort, paginate, order by, etc.
-})
-`
 
 function isUrlLink(link: AnyLink<{label: string}>) {
   return link._type === 'url'
@@ -182,106 +148,15 @@ export default async function HomePage() {
     <WebLayout>
       <main className={styles.home()}>
         <HomeHero {...home?.hero} />
-
         <PageContainer>
           <div className={styles.home.sections()}>
             <WebText
               doc={home.body}
+              CodeTextBlock={CodeTextBlockView}
               FeaturesBlock={FeaturesBlockView}
+              ImageTextBlock={ImageTextBlockView}
               TemplateBlock={TemplateBlockView}
             />
-
-            <section className={styles.home.section()}>
-              <WebTypo>
-                <WebTypo.H2>
-                  Organize content in a clear,{'\n'}hierarchical structure
-                </WebTypo.H2>
-                <WebTypo.P>
-                  Editors can easily navigate, reorder, and manage pages in a
-                  way that makes sense for any project. Navigation stays simple,
-                  whether you’re editing in the dashboard or working with the
-                  API.
-                </WebTypo.P>
-              </WebTypo>
-
-              <div className={styles.home.section.illustration()}>
-                <StaticImage
-                  {...screenshot2}
-                  alt="Alinea dashboard screenshot"
-                  placeholder="blur"
-                  sizes="50vw"
-                  className={styles.home.section.screenshot()}
-                />
-              </div>
-            </section>
-
-            <section className={styles.home.section()}>
-              <div className={styles.home.section.illustration()}>
-                <CodeBlockView
-                  code={schemaExample.trim()}
-                  fileName=""
-                  language="tsx"
-                  compact={false}
-                />
-              </div>
-
-              <WebTypo>
-                <WebTypo.H2>
-                  Describe your schema in code,{'\n'}
-                  get back fully typed content
-                </WebTypo.H2>
-                <WebTypo.P>
-                  Define your content schema in code and get fully typed content
-                  instantly — no generation step needed. Skip the endless form
-                  clicks and manage structure with the same workflow: branch,
-                  test, and iterate in code.
-                </WebTypo.P>
-              </WebTypo>
-            </section>
-
-            <section className={styles.home.section()}>
-              <WebTypo>
-                <WebTypo.H2>Publish with control</WebTypo.H2>
-                <WebTypo.P>
-                  Work on content without publishing right away. Alinea makes it
-                  easy to manage drafts, archive old pages, and keep your
-                  workspace tidy. The workflow stays simple for everyday tasks,
-                  but gives you the structure and control needed for larger,
-                  more complex projects.
-                </WebTypo.P>
-              </WebTypo>
-
-              <div className={styles.home.section.illustration()}>
-                <StaticImage
-                  {...screenshot}
-                  alt="Alinea content tree screenshot"
-                  sizes="50vw"
-                  className={styles.home.section.screenshot()}
-                />
-              </div>
-            </section>
-
-            <section className={styles.home.section()}>
-              <div className={styles.home.section.illustration()}>
-                <CodeBlockView
-                  code={queryExample.trim()}
-                  fileName=""
-                  language="tsx"
-                  compact={false}
-                />
-              </div>
-
-              <WebTypo>
-                <WebTypo.H2>
-                  Content is local, versioned,{'\n'}and deploys with your site
-                </WebTypo.H2>
-                <WebTypo.P>
-                  Access content through a developer-friendly query API. Because
-                  everything is bundled at build time, there is no need for
-                  runtime fetching or external requests.
-                </WebTypo.P>
-              </WebTypo>
-            </section>
 
             <Features>
               <Feature>

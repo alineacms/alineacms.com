@@ -173,6 +173,92 @@
         "_target": "_blank",
         "label": "See the demo"
       }
+    },
+    {
+      "_type": "ImageTextBlock",
+      "_id": "30b1NfG0dxg8h0oihthWoqfmYEb",
+      "image": {
+        "_id": "30d8LDWLgQ2PtElGkGlWLbxCAYM",
+        "_type": "image",
+        "_entry": "30d8L6eW48c6flEKTY16bifAaUz",
+        "alt": "Alinea dashboard screenshot"
+      },
+      "imagePosition": "right",
+      "title": "Organize content in a clear, hierarchical structure",
+      "description": [
+        {
+          "_type": "paragraph",
+          "content": [
+            {
+              "_type": "text",
+              "text": "Editors can easily navigate, reorder, and manage pages in a way that makes sense for any project. Navigation stays simple, whether you’re editing in the dashboard or working with the API."
+            }
+          ]
+        }
+      ],
+      "button": {}
+    },
+    {
+      "_type": "CodeTextBlock",
+      "_id": "30b1MgT7V1SMQlSXIkvZ4CYslcm",
+      "code": "// Configure a CMS within minutes\n\nconst BlogPost = Config.document('Blog post', {\n  fields: {\n    title: Field.text('Title'),\n    body: Field.richText('Body text')\n  }\n})\n\nconst Blog = Config.document('Blog', {\n  contains: [BlogPost]\n})\n\nconst cms = createCMS({schema: {Blog, BlogPost}})",
+      "codePosition": "left",
+      "title": "Describe your schema in code, get back fully typed content",
+      "description": [
+        {
+          "_type": "paragraph",
+          "content": [
+            {
+              "_type": "text",
+              "text": "Define your content schema in code and get fully typed content instantly — no generation step needed. Skip the endless form clicks and manage structure with the same workflow: branch, test, and iterate in code."
+            }
+          ]
+        }
+      ],
+      "button": {}
+    },
+    {
+      "_type": "ImageTextBlock",
+      "_id": "30d8SOd8IKw1Z7HDzWE1iw3QwWw",
+      "image": {
+        "_id": "30d8aJObcp1hcTTpmrXhA7l25Z0",
+        "_type": "image",
+        "_entry": "30d8aGj8XsC9oUOSVKNlXMQd2Kl",
+        "alt": "Alinea content tree screenshot"
+      },
+      "imagePosition": "right",
+      "title": "Publish with control",
+      "description": [
+        {
+          "_type": "paragraph",
+          "content": [
+            {
+              "_type": "text",
+              "text": "Work on content without publishing right away. Alinea makes it easy to manage drafts, archive old pages, and keep your workspace tidy. The workflow stays simple for everyday tasks, but gives you the structure and control needed for larger, more complex projects."
+            }
+          ]
+        }
+      ],
+      "button": {}
+    },
+    {
+      "_type": "CodeTextBlock",
+      "_id": "30d8eGs51u1DI2dyGhkISNe8KB6",
+      "code": "// Query content within React components\n\nconst blog = await cms.get({\n  type: Blog\n})\n\nconst posts = await cms.find({\n  type: BlogPost,\n  select: {title: BlogPost.title, body: BlogPost.body}\n  // ... filter, sort, paginate, order by, etc.\n})",
+      "codePosition": "left",
+      "title": "Content is local, versioned and deploys with your site",
+      "description": [
+        {
+          "_type": "paragraph",
+          "content": [
+            {
+              "_type": "text",
+              "text": "Access content through a developer-friendly query API. Because everything is bundled at build time, there is no need for runtime fetching or external requests."
+            }
+          ]
+        }
+      ],
+      "button": {}
     }
   ],
   "links": [

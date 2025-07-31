@@ -18,7 +18,7 @@ export type ImageProps = Omit<NextImageProps, 'alt'> &
 export function Image(image: ImageProps) {
   if (!image?.src) return null
 
-  const {focus, thumbHash, title, ...props} = image
+  const {className, focus, thumbHash, title, ...props} = image
   const alt = image?.fields?.alt || title || ''
   const blurUrl = imageBlurUrl(image)
 
@@ -37,7 +37,7 @@ export function Image(image: ImageProps) {
   delete (props as any).thumbHash
 
   return (
-    <div className={styles.image()}>
+    <div className={styles.image(styler.merge({className}))}>
       <NextImage
         {...props}
         alt={alt}

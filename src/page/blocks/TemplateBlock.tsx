@@ -29,13 +29,11 @@ export function TemplateBlockView({
   return (
     <section className={styles.root(imagePosition)}>
       {image?.src && (
-        <div className={styles.root.illustration()}>
-          <Image
-            {...image}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className={styles.root.screenshot()}
-          />
-        </div>
+        <Image
+          {...image}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className={styles.root.illustration()}
+        />
       )}
       <VStack gap={16}>
         <WebTypo>
