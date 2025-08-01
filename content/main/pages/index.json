@@ -259,6 +259,156 @@
         }
       ],
       "button": {}
+    },
+    {
+      "_type": "FeaturesBlock",
+      "_id": "30gpNz3rEan9j2XikqIfxKaghJn",
+      "items": [
+        {
+          "_id": "30gpOMpwGo5T4dhGMXcnXEXjBXb",
+          "_index": "a0",
+          "_type": "FeatureItem",
+          "icon": "ProiconsOpenSource",
+          "title": "Open source",
+          "description": [
+            {
+              "_type": "paragraph",
+              "content": [
+                {
+                  "_type": "text",
+                  "text": "Open source by design, Alinea gives you full control over your CMS. Use it, extend it, or contribute back."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_id": "30gpONndCs15dGVedmdUgN2oCeC",
+          "_index": "a1",
+          "_type": "FeatureItem",
+          "icon": "RiFlashlightFill",
+          "title": "Live Previews",
+          "description": [
+            {
+              "_type": "paragraph",
+              "content": [
+                {
+                  "_type": "text",
+                  "text": "See exactly what content changes look like in real time. Preview updates instantly with full support for React Server Components."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_id": "30gpOY2tbq8H85U71uAVyd1c7q6",
+          "_index": "a2",
+          "_type": "FeatureItem",
+          "icon": "IcBaselineDashboardCustomize",
+          "title": "Custom Fields",
+          "description": [
+            {
+              "_type": "paragraph",
+              "content": [
+                {
+                  "_type": "text",
+                  "text": "Extend Alinea with your own fields. Create custom inputs with simple constructor functions. Tailored to exactly what your editors need."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "QuickLinksBlock",
+      "_id": "30grXuuQKS10oF93NRo8yrkvEmY",
+      "items": [
+        {
+          "_id": "30grYHybqwyZ3rOkzWahWa9XssA",
+          "_index": "a0",
+          "_type": "Item",
+          "icon": "RiFlashlightFill",
+          "link": {
+            "_id": "30grfDuDyDZUsSF4v3HSZYUKmdK",
+            "_type": "entry",
+            "_entry": "2YlBsRF2vZwxcS27oOSJYmQM37q",
+            "label": ""
+          }
+        },
+        {
+          "_id": "30grYu1i5IqeEZD3Gi0zG3tLlkv",
+          "_index": "a1",
+          "_type": "Item",
+          "icon": "IcRoundPublish",
+          "link": {
+            "_id": "30grh4Imy07gkciS2N5xJm2DgyK",
+            "_type": "entry",
+            "_entry": "2YlP39QVFZOzf94YMwDVrzd4gNz",
+            "label": "Editorial workflow"
+          }
+        },
+        {
+          "_id": "30grZ56H732KEf0zVaScH4vGBkj",
+          "_index": "a2",
+          "_type": "Item",
+          "icon": "IcRoundInsertDriveFile",
+          "link": {
+            "_id": "30grjZHzxjHn0Gdo9ENlReoe5K2",
+            "_type": "entry",
+            "_entry": "28hxVNf3JO9raYJ1HVQ6XgDX9pW",
+            "label": "Query engine"
+          }
+        },
+        {
+          "_id": "30guDtAVNFcZ3mrNbIHXufTSunz",
+          "_index": "a3",
+          "_type": "Item",
+          "icon": "IcBaselineDashboardCustomize",
+          "link": {
+            "_id": "30guJ8pp1O7LHSzeSiTE1NHdq01",
+            "_type": "entry",
+            "_entry": "286iEJsjhd8R9NxN6EVg59fELyd",
+            "label": ""
+          }
+        },
+        {
+          "_id": "30guDzlWnhXq1bxb5u07EdqG0WM",
+          "_index": "a4",
+          "_type": "Item",
+          "icon": "IcBaselineWorkspaces",
+          "link": {
+            "_id": "30guLkgd54TdG8LnH2YPU0p8zhv",
+            "_type": "entry",
+            "_entry": "259EzPfnSUaKOrNL1S2bpIpMdKl",
+            "label": ""
+          }
+        },
+        {
+          "_id": "30guE4193sRTy0vaLra37vKoiup",
+          "_index": "a5",
+          "_type": "Item",
+          "icon": "PhGlobe",
+          "link": {
+            "_id": "30guMqWPuF2tnwc1y6EIKl08fuR",
+            "_type": "entry",
+            "_entry": "2YcyNztG4JXc8TLpT4l1l7njGtn",
+            "label": ""
+          }
+        },
+        {
+          "_id": "30guE7Wghz69C67KLQgv7u3Gd6A",
+          "_index": "a6",
+          "_type": "Item",
+          "icon": "IcBaselineCloudQueue",
+          "link": {
+            "_id": "30guP9TP51Efa5V7zRVoeEuzZsV",
+            "_type": "entry",
+            "_entry": "28NgMpMQkmTy4uyFhPj8z4XVqml",
+            "label": "Self-host or cloud host"
+          }
+        }
+      ]
     }
   ],
   "links": [

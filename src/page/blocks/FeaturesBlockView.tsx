@@ -1,33 +1,36 @@
-import {supportedFrameworks} from '@/layout/nav/Frameworks'
 import styler from '@alinea/styler'
-import {Infer} from 'alinea'
-import {RenderSelectedFramework} from './FrameworkBlockView.client'
-import css from './FrameworkBlockView.module.scss'
-import {TextFieldView} from './TextFieldView'
-import {FeaturesBlock} from '@/schema/blocks/FeaturesBlock'
-import {Feature, Features} from '@/layout/Features'
-import {WebTypo} from '@/layout/WebTypo'
-import {WebText} from '@/layout/WebText'
+import type {Infer} from 'alinea'
+import {RiFlashlightFill} from 'alinea/ui/icons/RiFlashlightFill'
 import {
-  IcBaselineCloudQueue,
   IcBaselineDashboardCustomize,
-  IcBaselineWorkspaces,
   IcRoundFastForward,
   MdiLanguageTypescript,
-  MdiSourceBranch
+  MdiSourceBranch,
+  ProiconsOpenSource
 } from '@/icons'
+import {Feature, Features} from '@/layout/Features'
+import {WebText} from '@/layout/WebText'
+import {WebTypo} from '@/layout/WebTypo'
+import type {FeaturesBlock} from '@/schema/blocks/FeaturesBlock'
+import css from './FrameworkBlockView.module.scss'
 
 const styles = styler(css)
 
 type FeatureItem = Infer<typeof FeaturesBlock>['items'][number]
 function getIcon(iconName: FeatureItem['icon']) {
   switch (iconName) {
+    case 'IcBaselineDashboardCustomize':
+      return IcBaselineDashboardCustomize
     case 'IcRoundFastForward':
       return IcRoundFastForward
     case 'MdiSourceBranch':
       return MdiSourceBranch
     case 'MdiLanguageTypescript':
       return MdiLanguageTypescript
+    case 'ProiconsOpenSource':
+      return ProiconsOpenSource
+    case 'RiFlashlightFill':
+      return RiFlashlightFill
     default:
       return undefined
   }

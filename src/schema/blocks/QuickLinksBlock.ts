@@ -1,28 +1,32 @@
 import {Config, Field} from 'alinea'
-import {IcRoundViewModule} from '@/layout/icons/IcRoundViewModule'
 
-export const FeaturesBlock = Config.type('Features', {
-  icon: IcRoundViewModule,
+export const QuickLinksBlock = Config.type('Quick links', {
   fields: {
     items: Field.list('Items', {
       schema: {
-        FeatureItem: Config.type('Item', {
+        Item: Config.type('Item', {
           fields: {
             icon: Field.select('Icon', {
               width: 0.25,
               options: {
+                IcBaselineCloudQueue: 'IcBaselineCloudQueue',
                 IcBaselineDashboardCustomize: 'IcBaselineDashboardCustomize',
+                IcBaselineWorkspaces: 'IcBaselineWorkspaces',
                 IcRoundFastForward: 'IcRoundFastForward',
+                IcRoundInsertDriveFile: 'IcRoundInsertDriveFile',
+                IcRoundPublish: 'IcRoundPublish',
                 MdiSourceBranch: 'MdiSourceBranch',
                 MdiLanguageTypescript: 'MdiLanguageTypescript',
+                PhGlobe: 'PhGlobe',
                 ProiconsOpenSource: 'ProiconsOpenSource',
                 RiFlashlightFill: 'RiFlashlightFill'
               }
             }),
-            title: Field.text('Title', {
-              width: 0.75
-            }),
-            description: Field.richText('Description')
+            link: Field.link('Link', {
+              fields: {
+                label: Field.text('Label')
+              }
+            })
           }
         })
       }

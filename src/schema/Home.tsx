@@ -3,6 +3,7 @@ import {IcRoundLink} from 'alinea/ui/icons/IcRoundLink'
 import {CodeTextBlock} from './blocks/CodeTextBlock'
 import {FeaturesBlock} from './blocks/FeaturesBlock'
 import {ImageTextBlock} from './blocks/ImageTextBlock'
+import {QuickLinksBlock} from './blocks/QuickLinksBlock'
 import {TemplateBlock} from './blocks/TemplateBlock'
 
 export const Home = Config.document('Home', {
@@ -44,7 +45,8 @@ export const Home = Config.document('Home', {
               CodeTextBlock,
               FeaturesBlock,
               ImageTextBlock,
-              TemplateBlock
+              TemplateBlock,
+              QuickLinksBlock
             }
           })
         }
