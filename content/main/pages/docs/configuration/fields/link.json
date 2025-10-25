@@ -11,7 +11,7 @@
       "content": [
         {
           "_type": "text",
-          "text": "The link field can be used to create one or multiple references to other entries or an external resources (like a webpage or an email address). By default the user can choose between internal pages, external urls or uploaded files. If you want to limit to selection to just one of those options it's possible to declare the field as either an "
+          "text": "The link field can be used to create one or multiple references to other entries or external resources (like a webpage or an email address). By default, the user can choose between internal pages, external urls or uploaded files. If you want to limit to selection to just one of those options it's possible to declare the field as either an "
         },
         {
           "_type": "text",
