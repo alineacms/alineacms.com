@@ -67,7 +67,7 @@
     {
       "_type": "CodeBlock",
       "_id": "XeX5lTJqsjNbbd4OwYOzD",
-      "code": "// Example: start the dashboard and next development server\nalinea serve -- next dev",
+      "code": "// Example: start the dashboard and next development server\nalinea dev -- next dev",
       "fileName": "",
       "language": "",
       "compact": false
