@@ -136,9 +136,10 @@ function renderNode(
       return body ? `Note (${level}): ${body}` : `Note (${level})`
     }
     case 'ImageBlock': {
-      const image = node.image && typeof node.image === 'object'
-        ? (node.image as Record<string, unknown>)
-        : null
+      const image =
+        node.image && typeof node.image === 'object'
+          ? (node.image as Record<string, unknown>)
+          : null
       const entryId = image ? (image._entry as string | undefined) : undefined
       if (typeof entryId === 'string') {
         const image = mediaMap.get(entryId)
@@ -193,6 +194,8 @@ function renderNodes(
   }
   return blocks.join('\n\n')
 }
+
+export const dynamic = 'force-static'
 
 export async function GET() {
   const docsRoot = await cms.get({
