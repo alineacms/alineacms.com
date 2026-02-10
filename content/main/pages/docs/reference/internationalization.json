@@ -12,7 +12,7 @@
       "content": [
         {
           "_type": "text",
-          "text": "Alinea is built with internalization in mind. It's possible to make content available in more than one language or region. To get started configure the `i18n` on a "
+          "text": "Alinea is built with internationalization in mind. It's possible to make content available in more than one language or region. To get started configure the `i18n` on a "
         },
         {
           "_type": "text",

@@ -11,7 +11,7 @@
       "content": [
         {
           "_type": "text",
-          "text": "The Alinea backend can be hosted on most Javascript runtimes if provided with a database (PostgreSQL, SQLite or Mysql) and a Github authentication token. Commits are persisted to the repository via the Github API. See a list of supported database drivers "
+          "text": "The Alinea backend can be hosted on most JavaScript runtimes if provided with a database (PostgreSQL, SQLite or MySQL) and a GitHub authentication token. Commits are persisted to the repository via the GitHub API. See a list of supported database drivers "
         },
         {
           "_type": "text",
@@ -48,7 +48,7 @@
       "content": [
         {
           "_type": "text",
-          "text": "An example of hosting the backend on Vercel using the included Postgres database. Authentication is provided using basic HTTP authentication. Create the credentials and a Github token and store them in your environment variables. "
+          "text": "An example of hosting the backend on Vercel using the included Postgres database. Authentication is provided using basic HTTP authentication. Create the credentials and a GitHub token and store them in your environment variables. "
         }
       ]
     },
