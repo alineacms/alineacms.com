@@ -32,7 +32,7 @@
         {
           "_type": "CodeBlock",
           "_id": "2YXL5zGSUUiBumPIemixlnKqCyL",
-          "code": "npx create-next-app@latest",
+          "code": "npx create-next-app@latest my-app",
           "fileName": "",
           "language": "shellscript",
           "compact": false
@@ -84,7 +84,7 @@
           "content": [
             {
               "_type": "text",
-              "text": "Navigate to the newly created project directory and install the package with your preferred package manager."
+              "text": "Navigate to the newly created project directory and install the package with your preferred package manager. If you used the command above, run `cd my-app` first."
             }
           ]
         },
@@ -207,7 +207,7 @@
           "content": [
             {
               "_type": "text",
-              "text": "4. Adjust Next.js config"
+              "text": "4. Optional: adjust Next.js config"
             }
           ]
         },
@@ -217,7 +217,7 @@
           "content": [
             {
               "_type": "text",
-              "text": "To work around a few Next.js quirks some config changes are needed. Alinea exports a function to do this for you:"
+              "text": "Most projects generated with `alinea init` work without this step. If you maintain a custom Next config, you can wrap it with `withAlinea`:"
             }
           ]
         },
@@ -261,14 +261,14 @@
       "content": [
         {
           "_type": "text",
-          "text": "Congratulations, Alinea is now ready to boot!"
+          "text": "Alinea is now ready to boot."
         },
         {
           "_type": "hardBreak"
         },
         {
           "_type": "text",
-          "text": "Have a look around in the dashboard by running:"
+          "text": "Start your app and CMS together with:"
         }
       ]
     },
@@ -282,7 +282,7 @@
           "_type": "Variant",
           "name": "npm",
           "language": "shellscript",
-          "code": "npx alinea dev"
+          "code": "npm run dev"
         },
         {
           "_id": "2YcsqDyTPJFoUeSjn6ZYJpcdWix",
@@ -290,7 +290,7 @@
           "_type": "Variant",
           "name": "yarn",
           "language": "shellscript",
-          "code": "yarn alinea dev"
+          "code": "yarn dev"
         },
         {
           "_id": "2YcsrOH1ImdTgzQ3C4nWULoN0lQ",
@@ -298,7 +298,7 @@
           "_type": "Variant",
           "name": "pnpm",
           "language": "shellscript",
-          "code": "pnpm alinea dev"
+          "code": "pnpm dev"
         },
         {
           "_id": "2nvS0mDMAOjffEPMa3RJpL5rzUe",
@@ -306,7 +306,17 @@
           "_type": "Variant",
           "name": "bun",
           "language": "shellscript",
-          "code": "bun alinea dev"
+          "code": "bun run dev"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Then open `/admin.html` on your local Next.js URL (usually `http://localhost:3000/admin.html`). If you only want to run the standalone CMS server, use `npx alinea dev` (default: `http://localhost:4500`)."
         }
       ]
     }
