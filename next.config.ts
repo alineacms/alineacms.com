@@ -1,6 +1,8 @@
 import {withAlinea} from 'alinea/next'
 import type {NextConfig} from 'next'
 
+console.log(process.env)
+
 const nextConfig: NextConfig = {
   reactStrictMode: false,
   typescript: {
