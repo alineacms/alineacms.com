@@ -13,7 +13,7 @@
     "@biomejs/biome": "^2.1.2",
     "@monaco-editor/react": "^4.4.5",
     "@vercel/postgres": "^0.10.0",
-    "alinea": "https://pkg.pr.new/alineacms/alinea@fc74443",
+    "alinea": "https://pkg.pr.new/alineacms/alinea@479e3ce",
     "jotai": "^2.12.5",
     "lz-string": "^1.4.4",
     "next": "^16.1.6",
