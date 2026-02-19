@@ -2,6 +2,6 @@
   "_id": "39stlaeS8bca7zQAD6tEGyC2afJ",
   "_type": "MediaLibrary",
   "_index": "a4",
-  "title": "folder",
-  "path": "folder"
+  "_root": "media",
+  "title": "folder"
 }
