@@ -9,7 +9,7 @@
         "@biomejs/biome": "^2.1.2",
         "@monaco-editor/react": "^4.4.5",
         "@vercel/postgres": "^0.10.0",
-        "alinea": "1.7.0-preview.3",
+        "alinea": "1.7.0-preview.4",
         "jotai": "^2.12.5",
         "lz-string": "^1.4.4",
         "next": "^16.1.6",
@@ -245,7 +245,7 @@
 
     "@vercel/postgres": ["@vercel/postgres@0.10.0", "", { "dependencies": { "@neondatabase/serverless": "^0.9.3", "bufferutil": "^4.0.8", "ws": "^8.17.1" } }, "sha512-fSD23DxGND40IzSkXjcFcxr53t3Tiym59Is0jSYIFpG4/0f0KO9SGtcp1sXiebvPaGe7N/tU05cH4yt2S6/IPg=="],
 
-    "alinea": ["alinea@1.7.0-preview.3", "", { "dependencies": { "@alinea/iso": "^0.3.3", "esbuild": "^0.25.4" }, "peerDependencies": { "react": "*", "react-dom": "*" }, "bin": { "alinea": "dist/cli.js" } }, "sha512-ALvYRYxcxR3YBFEqiKzNDZUDOeCovLBhUk1Nz9sDFvYKKo9SK8mfgJQnf1mYc5KZvpqbe/Ybu58yRYOZhwZzRw=="],
+    "alinea": ["alinea@1.7.0-preview.4", "", { "dependencies": { "@alinea/iso": "^0.3.3", "esbuild": "^0.25.4" }, "peerDependencies": { "react": "*", "react-dom": "*" }, "bin": { "alinea": "dist/cli.js" } }, "sha512-YX26n6WIBg5UiALv15p+E6NBiQli5vLajdejB3zu03k5DTZ3VKH+0MUgNrhl0kuBtcTIonhdLxvurzTHdBUrjQ=="],
 
     "bail": ["bail@2.0.2", "", {}, "sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw=="],
 
