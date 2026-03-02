@@ -1,0 +1,108 @@
+{
+  "_id": "3AONC9h7c2NnMtmorYnCBd19LjN",
+  "_type": "Doc",
+  "_index": "a3",
+  "title": "Step 4: Add a fixed /blog with Post child entries",
+  "navigationTitle": "Step 4: Blog + posts",
+  "body": [
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Create a Blog entry fixed at /blog and Post child entries with editable path. Then wire dedicated page.tsx handlers for the listing and post detail pages."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONyq914KorM1VYG7dLQ7qNeaP",
+      "code": "app/\n├ page.tsx\n├ layout.tsx\n├ blog/page.tsx\n╰ blog/[slug]/page.tsx\n\nentries/\n├ landing/\n│ ├ LandingPage.tsx\n│ ╰ LandingPage.schema.tsx\n├ blog/\n│ ├ BlogPage.tsx\n│ ├ BlogPostPage.tsx\n│ ├ BlogPage.schema.tsx\n│ ╰ PostPage.schema.tsx\n╰ settings/\n  ├ SiteLayout.tsx\n  ╰ SiteLayout.schema.tsx\n\nblocks/\n├ text/\n│ ├ TextBlock.tsx\n│ ╰ TextBlock.schema.tsx\n├ image/\n│ ├ ImageBlock.tsx\n│ ╰ ImageBlock.schema.tsx\n╰ gallery/\n  ├ GalleryBlock.tsx\n  ╰ GalleryBlock.schema.tsx\n\ncms.tsx",
+      "fileName": "project structure",
+      "language": "",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Add separate schemas for the fixed blog overview entry and its post children."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONC9sajrQz13Tq4oiEHyJxDUC",
+      "code": "// entries/blog/BlogPage.schema.tsx\nimport {Config, Field} from 'alinea'\n\nexport const BlogPage = Config.document('Blog page', {\n  contains: ['PostPage'],\n  fields: {\n    title: Field.text('Title', {required: true}),\n    path: Field.path('Path', {readOnly: true, initialValue: 'blog'}),\n    intro: Field.text('Intro', {multiline: true})\n  }\n})\n\n// entries/blog/PostPage.schema.tsx\nimport {Config, Field} from 'alinea'\n\nexport const PostPage = Config.document('Post page', {\n  fields: {\n    title: Field.text('Title', {required: true}),\n    path: Field.path('Path', {required: true}),\n    excerpt: Field.text('Excerpt', {multiline: true}),\n    body: Field.text('Body', {multiline: true})\n  }\n})",
+      "fileName": "entries/blog/*.schema.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Implement the blog listing and post detail views using Infer-based prop types."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AOUDMwZfHrD4Rj1a3NYoIiHWuc",
+      "code": "// entries/blog/BlogPage.tsx\nimport {Infer} from 'alinea'\nimport {BlogPage} from './BlogPage.schema'\n\ntype BlogData = Infer<typeof BlogPage>\n\nexport function BlogPageView({page, posts}: {page: BlogData; posts: Array<{id: string; title: string; url: string}>}) {\n  return (\n    <main>\n      <h1>{page.title}</h1>\n      {page.intro && <p>{page.intro}</p>}\n      <ul>\n        {posts.map(post => (\n          <li key={post.id}>\n            <a href={post.url}>{post.title}</a>\n          </li>\n        ))}\n      </ul>\n    </main>\n  )\n}\n\n// entries/blog/BlogPostPage.tsx\nimport {Infer} from 'alinea'\nimport {PostPage} from './PostPage.schema'\n\ntype PostData = Infer<typeof PostPage>\n\nexport function BlogPostPageView({post}: {post: PostData}) {\n  return (\n    <article>\n      <h1>{post.title}</h1>\n      <p>{post.body}</p>\n    </article>\n  )\n}",
+      "fileName": "entries/blog/*Page.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Update the Pages root to include the blog entry and seed an initial post."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONC7OGaXa2S1uEHArBC9wRAyw",
+      "code": "// cms.tsx (pages root update)\nimport {LandingPage} from '@/entries/landing/LandingPage.schema'\n\nconst pages = Config.root('Pages', {\n  contains: ['LandingPage', 'BlogPage'],\n  children: {\n    index: Config.page({type: LandingPage, fields: {title: 'Welcome', path: ''}}),\n    blog: Config.page({\n      type: BlogPage,\n      fields: {title: 'Blog', path: 'blog', intro: 'Latest posts'},\n      children: {\n        'hello-world': Config.page({\n          type: PostPage,\n          fields: {\n            title: 'Hello world',\n            path: 'hello-world',\n            excerpt: 'My first post',\n            body: 'Welcome to the blog'\n          }\n        })\n      }\n    })\n  }\n})",
+      "fileName": "cms.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Add dedicated Next.js routes for the blog index and individual post pages."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONCD9vnb4pkvdOWCDPPOmBAab",
+      "code": "// app/blog/page.tsx\nimport {Entry} from 'alinea/core/Entry'\nimport {cms} from '@/cms'\nimport {BlogPageView} from '@/entries/blog/BlogPage'\n\nexport default async function BlogRoute() {\n  const page = await cms.get({url: '/blog'})\n  const posts = await cms.find({\n    parentId: page._id,\n    select: {\n      id: Entry.id,\n      title: Entry.title,\n      url: Entry.url\n    }\n  })\n\n  return <BlogPageView page={page} posts={posts} />\n}\n\n// app/blog/[slug]/page.tsx\nimport {Entry} from 'alinea/core/Entry'\nimport {notFound} from 'next/navigation'\nimport {cms} from '@/cms'\nimport {PostPage} from '@/entries/blog/PostPage.schema'\nimport {BlogPostPageView} from '@/entries/blog/BlogPostPage'\n\nexport async function generateStaticParams() {\n  const urls = await cms.find({\n    type: PostPage,\n    select: Entry.url\n  })\n  return urls.map(url => ({slug: url.split('/').pop()!}))\n}\n\nexport default async function BlogPostRoute({params}: {params: {slug: string}}) {\n  const post = await cms.get({url: `/blog/${params.slug}`})\n  if (!post) notFound()\n  return <BlogPostPageView post={post} />\n}",
+      "fileName": "app/blog/page.tsx and app/blog/[slug]/page.tsx",
+      "language": "tsx",
+      "compact": false
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "title": "",
+      "image": {},
+      "description": ""
+    }
+  }
+}

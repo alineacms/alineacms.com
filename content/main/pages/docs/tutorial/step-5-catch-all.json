@@ -1,0 +1,82 @@
+{
+  "_id": "3AONCEKYoMQiZ5HZWNKbMB8oVUT",
+  "_type": "Doc",
+  "_index": "a4",
+  "title": "Step 5: Use a catch-all slug route",
+  "navigationTitle": "Step 5: Catch-all route",
+  "body": [
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Replace dedicated routes with one catch-all route. Resolve the URL from slug segments, then switch on page._type to render the correct view."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONyof32uSAsVKwWOVlZSoYACo",
+      "code": "app/\n├ layout.tsx\n╰ [[...slug]]/page.tsx\n\nentries/\n├ landing/\n│ ├ LandingPage.tsx\n│ ╰ LandingPage.schema.tsx\n├ blog/\n│ ├ BlogPage.tsx\n│ ├ BlogPostPage.tsx\n│ ├ BlogPage.schema.tsx\n│ ╰ PostPage.schema.tsx\n├ settings/\n│ ├ SiteLayout.tsx\n│ ╰ SiteLayout.schema.tsx\n╰ page/\n  ╰ SitePage.schema.tsx\n\nblocks/\n├ text/\n│ ├ TextBlock.tsx\n│ ╰ TextBlock.schema.tsx\n├ image/\n│ ├ ImageBlock.tsx\n│ ╰ ImageBlock.schema.tsx\n╰ gallery/\n  ├ GalleryBlock.tsx\n  ╰ GalleryBlock.schema.tsx\n\ncms.tsx",
+      "fileName": "project structure",
+      "language": "",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Define a recursive SitePage entry type so editors can freely nest regular site pages."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONC7x8fNldabo2MZApzs6EbcP",
+      "code": "// entries/page/SitePage.schema.tsx\nimport {Config, Field} from 'alinea'\n\nexport const SitePage = Config.document('Page', {\n  contains: ['SitePage'],\n  fields: {\n    title: Field.text('Title', {required: true}),\n    path: Field.path('Path', {required: true}),\n    blocks: Field.list('Blocks', {\n      schema: {\n        TextBlock,\n        ImageBlock,\n        GalleryBlock\n      }\n    })\n  }\n})\n\n// cms.tsx (root allows nested SitePage entries)\nconst pages = Config.root('Pages', {\n  contains: ['SitePage', 'BlogPage'],\n  children: {\n    index: Config.page({type: SitePage, fields: {title: 'Home', path: ''}}),\n    products: Config.page({\n      type: SitePage,\n      fields: {title: 'Products', path: 'products'},\n      children: {\n        enterprise: Config.page({\n          type: SitePage,\n          fields: {title: 'Enterprise', path: 'enterprise'}\n        })\n      }\n    })\n  }\n})",
+      "fileName": "entries/page/SitePage.schema.tsx and cms.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Use a catch-all route that rebuilds the URL from slug segments and resolves the matching entry."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONC8Rcye6z7EGBmQ3AbwCi67i",
+      "code": "// app/[[...slug]]/page.tsx\nimport {Entry} from 'alinea/core/Entry'\nimport {notFound} from 'next/navigation'\nimport {cms} from '@/cms'\nimport {LandingPageView} from '@/entries/landing/LandingPage'\nimport {BlogPageView} from '@/entries/blog/BlogPage'\nimport {BlogPostPageView} from '@/entries/blog/BlogPostPage'\n\ninterface RouteProps {\n  params: Promise<{slug?: Array<string>}>\n}\n\nexport async function generateStaticParams() {\n  const urls = await cms.find({\n    root: cms.workspaces.main.pages,\n    select: Entry.url\n  })\n\n  return urls.map(url => ({slug: url === '/' ? [] : url.slice(1).split('/')}))\n}\n\nexport default async function CatchAllPage({params}: RouteProps) {\n  const {slug = []} = await params\n  const url = slug.length > 0 ? `/${slug.join('/')}` : '/'\n  const page = await cms.get({url})\n\n  if (!page) notFound()\n\n  if (page._type === 'BlogPage') {\n    const posts = await cms.find({\n      parentId: page._id,\n      select: {\n        id: Entry.id,\n        title: Entry.title,\n        url: Entry.url\n      }\n    })\n    return <BlogPageView page={page} posts={posts} />\n  }\n\n  if (page._type === 'PostPage') {\n    return <BlogPostPageView post={page} />\n  }\n\n  return <LandingPageView page={page} />\n}",
+      "fileName": "app/[[...slug]]/page.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "This route replaces app/page.tsx, app/blog/page.tsx, and app/blog/[slug]/page.tsx by branching on page._type."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "title": "",
+      "image": {},
+      "description": ""
+    }
+  }
+}

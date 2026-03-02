@@ -4,6 +4,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "ensure:alinea": "bash scripts/ensure-alinea.sh > /dev/null",
     "dev": "alinea dev -- next dev",
     "build": "alinea build -- next build",
     "start": "next start"
@@ -13,7 +14,7 @@
     "@biomejs/biome": "^2.1.2",
     "@monaco-editor/react": "^4.4.5",
     "@vercel/postgres": "^0.10.0",
-    "alinea": "1.5.3",
+    "alinea": "1.6.2",
     "jotai": "^2.12.5",
     "lz-string": "^1.4.4",
     "next": "^15.4.10",

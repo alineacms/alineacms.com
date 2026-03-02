@@ -1,0 +1,58 @@
+{
+  "_id": "3AONCC6cssRWNTfGBx86XSB2Exn",
+  "_type": "Docs",
+  "_index": "Zgm",
+  "title": "Tutorial",
+  "navigationTitle": "Tutorial",
+  "body": [
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "This tutorial is an opinionated, Next.js-first setup for building a real website with Alinea. It starts with one fixed homepage entry and grows into blocks, shared layout content, a blog, and finally a catch-all route."
+        }
+      ]
+    },
+    {
+      "_type": "heading",
+      "level": 2,
+      "content": [
+        {
+          "_type": "text",
+          "text": "Conventions used in every step"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "All schema definitions are shown in cms.tsx. Each page type and block type still lives in its own folder with a server component and schema file."
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Continue with the five steps in this section."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "title": "",
+      "image": {},
+      "description": ""
+    }
+  }
+}

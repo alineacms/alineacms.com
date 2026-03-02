@@ -38,3 +38,4 @@ next-env.d.ts
 /public/admin*
 /src/page/playground/alinea.d.ts.txt
 .env
+.cache/

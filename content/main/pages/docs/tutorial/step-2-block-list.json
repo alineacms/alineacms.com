@@ -1,0 +1,90 @@
+{
+  "_id": "3AONCBGWB01JivtUHVnGHF3ICYf",
+  "_type": "Doc",
+  "_index": "a1",
+  "title": "Step 2: Add a list of blocks",
+  "navigationTitle": "Step 2: Block list",
+  "body": [
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Add a Field.list to represent page blocks. In this step the list supports text, image, and gallery blocks."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONynxdbatHNaFXlDRzzKGpfAh",
+      "code": "app/\n╰ page.tsx\n\nentries/\n╰ landing/\n  ├ LandingPage.tsx\n  ╰ LandingPage.schema.tsx\n\nblocks/\n├ text/\n│ ├ TextBlock.tsx\n│ ╰ TextBlock.schema.tsx\n├ image/\n│ ├ ImageBlock.tsx\n│ ╰ ImageBlock.schema.tsx\n╰ gallery/\n  ├ GalleryBlock.tsx\n  ╰ GalleryBlock.schema.tsx\n\ncms.tsx",
+      "fileName": "project structure",
+      "language": "",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Create each block type as a schema and a matching view component."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONCE5z57fJ5wQNqFZAuwbuTw3",
+      "code": "// blocks/text/TextBlock.schema.tsx\nimport {Config, Field} from 'alinea'\n\nexport const TextBlock = Config.type('Text block', {\n  fields: {\n    body: Field.richText('Text')\n  }\n})\n\n// blocks/text/TextBlock.tsx\nimport {Infer} from 'alinea'\nimport {RichText} from 'alinea/ui'\nimport {TextBlock} from './TextBlock.schema'\n\ntype TextBlockData = Infer<typeof TextBlock>\n\nexport function TextBlockView({block}: {block: TextBlockData}) {\n  return <RichText doc={block.body} />\n}\n\n// blocks/image/ImageBlock.schema.tsx\nimport {Config, Field} from 'alinea'\n\nexport const ImageBlock = Config.type('Image block', {\n  fields: {\n    image: Field.image('Image', {required: true}),\n    alt: Field.text('Alt text')\n  }\n})\n\n// blocks/image/ImageBlock.tsx\nimport {Infer} from 'alinea'\nimport {ImageBlock} from './ImageBlock.schema'\n\ntype ImageBlockData = Infer<typeof ImageBlock>\n\nexport function ImageBlockView({block}: {block: ImageBlockData}) {\n  return <img src={block.image} alt={block.alt || ''} />\n}\n\n// blocks/gallery/GalleryBlock.schema.tsx\nimport {Config, Field} from 'alinea'\n\nexport const GalleryBlock = Config.type('Gallery block', {\n  fields: {\n    images: Field.image.multiple('Images')\n  }\n})\n\n// blocks/gallery/GalleryBlock.tsx\nimport {Infer} from 'alinea'\nimport {GalleryBlock} from './GalleryBlock.schema'\n\ntype GalleryBlockData = Infer<typeof GalleryBlock>\n\nexport function GalleryBlockView({block}: {block: GalleryBlockData}) {\n  return (\n    <ul>\n      {block.images.map(image => (\n        <li key={image}>\n          <img src={image} alt='' />\n        </li>\n      ))}\n    </ul>\n  )\n}",
+      "fileName": "blocks/*",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Extend the landing schema by adding a blocks list that references those block schemas."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONCCDEGYojdWJsNBkgIGBTklH",
+      "code": "// entries/landing/LandingPage.schema.tsx (LandingPage update)\nimport {Config, Field} from 'alinea'\n\nexport const LandingPage = Config.document('Landing page', {\n  fields: {\n    title: Field.text('Title', {required: true}),\n    path: Field.path('Path', {readOnly: true, initialValue: ''}),\n    blocks: Field.list('Blocks', {\n      schema: {\n        TextBlock,\n        ImageBlock,\n        GalleryBlock\n      }\n    })\n  }\n})",
+      "fileName": "entries/landing/LandingPage.schema.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Update the landing view to render each block variant based on its _type."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONCAjBNZ0oQZzXlZgUAVLJeYf",
+      "code": "// entries/landing/LandingPage.tsx\nimport {Infer} from 'alinea'\nimport {LandingPage} from './LandingPage.schema'\nimport {GalleryBlockView} from '@/blocks/gallery/GalleryBlock'\nimport {ImageBlockView} from '@/blocks/image/ImageBlock'\nimport {TextBlockView} from '@/blocks/text/TextBlock'\n\ntype LandingData = Infer<typeof LandingPage>\ntype Block = LandingData['blocks'][number]\n\nexport function LandingPageView({page}: {page: LandingData}) {\n  return (\n    <main>\n      <h1>{page.title}</h1>\n      {page.blocks.map(block => {\n        if (block._type === 'TextBlock') return <TextBlockView key={block._id} block={block} />\n        if (block._type === 'ImageBlock') return <ImageBlockView key={block._id} block={block} />\n        if (block._type === 'GalleryBlock') return <GalleryBlockView key={block._id} block={block} />\n        return null\n      })}\n    </main>\n  )\n}",
+      "fileName": "entries/landing/LandingPage.tsx",
+      "language": "tsx",
+      "compact": false
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "title": "",
+      "image": {},
+      "description": ""
+    }
+  }
+}

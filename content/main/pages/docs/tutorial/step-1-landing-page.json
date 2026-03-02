@@ -1,0 +1,108 @@
+{
+  "_id": "3AONC8bWerkI4aXNcgz4fOm5Mxe",
+  "_type": "Doc",
+  "_index": "a0",
+  "title": "Step 1: Simple landing page",
+  "navigationTitle": "Step 1: Landing page",
+  "body": [
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Start with one CMS entry for your landing page. Its path is fixed to an empty string so it always resolves to /."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONylaqcfOBvfq6SBaJh9zwYEP",
+      "code": "app/\n╰ page.tsx\n\nentries/\n╰ landing/\n  ├ LandingPage.tsx\n  ╰ LandingPage.schema.tsx\n\ncms.tsx",
+      "fileName": "project structure",
+      "language": "",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Start by defining the landing entry schema in its own file."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONC7AhYb0QcGKsM21ZfmIN3VT",
+      "code": "// entries/landing/LandingPage.schema.tsx\nimport {Config, Field} from 'alinea'\n\nexport const LandingPage = Config.document('Landing page', {\n  fields: {\n    title: Field.text('Title', {required: true}),\n    path: Field.path('Path', {readOnly: true, initialValue: ''})\n  }\n})",
+      "fileName": "entries/landing/LandingPage.schema.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Then build the rendering component and infer its data type directly from that schema."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AOUDOgAFF32REsMW4F1kxhQqG3",
+      "code": "// entries/landing/LandingPage.tsx\nimport {Infer} from 'alinea'\nimport {LandingPage} from './LandingPage.schema'\n\ntype LandingData = Infer<typeof LandingPage>\n\nexport function LandingPageView({page}: {page: LandingData}) {\n  return <h1>{page.title}</h1>\n}",
+      "fileName": "entries/landing/LandingPage.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Register the landing schema in cms.tsx and seed the initial homepage entry."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONCAa2Rl2v6v1rbhieBd2wvdb",
+      "code": "// cms.tsx\nimport {Config} from 'alinea'\nimport {createCMS} from 'alinea/next'\nimport {LandingPage} from '@/entries/landing/LandingPage.schema'\n\nexport const cms = createCMS({\n  schema: {LandingPage},\n  workspaces: {\n    main: Config.workspace('Main', {\n      source: 'content',\n      mediaDir: 'public',\n      roots: {\n        pages: Config.root('Pages', {\n          contains: ['LandingPage'],\n          children: {\n            index: Config.page({\n              type: LandingPage,\n              fields: {\n                title: 'Welcome',\n                path: ''\n              }\n            })\n          }\n        }),\n        media: Config.media()\n      }\n    })\n  },\n  handlerUrl: '/api/cms',\n  dashboardFile: 'admin.html',\n  preview: true\n})",
+      "fileName": "cms.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Finally, fetch that homepage entry in the route and pass it to the landing view."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONC9dl0liqkbFKz98iCvPT083",
+      "code": "// app/page.tsx\nimport {cms} from '@/cms'\nimport {LandingPageView} from '@/entries/landing/LandingPage'\n\nexport default async function Page() {\n  const page = await cms.get({url: '/'})\n  return <LandingPageView page={page} />\n}",
+      "fileName": "app/page.tsx",
+      "language": "tsx",
+      "compact": false
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "title": "",
+      "image": {},
+      "description": ""
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "_id": "3AONCCkqtmD6746UsDgQ826GDp8",
+  "_type": "Doc",
+  "_index": "a2",
+  "title": "Step 3: Add a root for shared layout content",
+  "navigationTitle": "Step 3: Shared root",
+  "body": [
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Create a separate root for content used by app/layout.tsx, such as header and footer text."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONylyqe1NxVsqSoHXkI14ZVIb",
+      "code": "app/\n├ page.tsx\n╰ layout.tsx\n\nentries/\n├ landing/\n│ ├ LandingPage.tsx\n│ ╰ LandingPage.schema.tsx\n╰ settings/\n  ├ SiteLayout.tsx\n  ╰ SiteLayout.schema.tsx\n\nblocks/\n├ text/\n│ ├ TextBlock.tsx\n│ ╰ TextBlock.schema.tsx\n├ image/\n│ ├ ImageBlock.tsx\n│ ╰ ImageBlock.schema.tsx\n╰ gallery/\n  ├ GalleryBlock.tsx\n  ╰ GalleryBlock.schema.tsx\n\ncms.tsx",
+      "fileName": "project structure",
+      "language": "",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Define a dedicated entry type for shared layout content used site-wide."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONCBs88Rae2Yvlxuo1F6kMkwe",
+      "code": "// entries/settings/SiteLayout.schema.tsx\nimport {Config, Field} from 'alinea'\n\nexport const SiteLayout = Config.document('Site layout', {\n  fields: {\n    title: Field.text('Entry title', {initialValue: 'Global settings'}),\n    path: Field.path('Path', {readOnly: true, initialValue: 'settings'}),\n    headerText: Field.text('Header text', {required: true}),\n    footerText: Field.text('Footer text', {required: true})\n  }\n})",
+      "fileName": "entries/settings/SiteLayout.schema.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Create small header/footer components and infer their props from the SiteLayout schema."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AOUDJmY1EjT6xeGANpfPNmFMMP",
+      "code": "// entries/settings/SiteLayout.tsx\nimport {Infer} from 'alinea'\nimport {SiteLayout as SiteLayoutEntry} from './SiteLayout.schema'\n\ntype SiteLayoutProps = Infer<typeof SiteLayoutEntry>\n\nexport function SiteHeader({settings}: {settings: SiteLayoutProps}) {\n  return <header>{settings.headerText}</header>\n}\n\nexport function SiteFooter({settings}: {settings: SiteLayoutProps}) {\n  return <footer>{settings.footerText}</footer>\n}",
+      "fileName": "entries/settings/SiteLayout.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Register SiteLayout in a dedicated globals root and seed one settings entry."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONC98ViuUoQseWLZhbiEMhISY",
+      "code": "// cms.tsx (roots update)\nimport {LandingPage} from '@/entries/landing/LandingPage.schema'\nimport {SiteLayout} from '@/entries/settings/SiteLayout.schema'\n\nexport const cms = createCMS({\n  schema: {\n    LandingPage,\n    SiteLayout\n  },\n  workspaces: {\n    main: Config.workspace('Main', {\n      source: 'content',\n      mediaDir: 'public',\n      roots: {\n        pages: Config.root('Pages', {\n          contains: ['LandingPage'],\n          children: {\n            index: Config.page({type: LandingPage, fields: {title: 'Welcome', path: ''}})\n          }\n        }),\n        globals: Config.root('Globals', {\n          contains: ['SiteLayout'],\n          children: {\n            settings: Config.page({\n              type: SiteLayout,\n              fields: {\n                title: 'Global settings',\n                path: 'settings',\n                headerText: 'My website',\n                footerText: 'Copyright 2026'\n              }\n            })\n          }\n        }),\n        media: Config.media()\n      }\n    })\n  }\n})",
+      "fileName": "cms.tsx",
+      "language": "tsx",
+      "compact": false
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Use the SiteLayout type in app/layout.tsx so the fetched settings entry is inferred correctly."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AONCCI4IpWHubFkjlGk0LP4Kaa",
+      "code": "// app/layout.tsx\nimport {cms} from '@/cms'\nimport {SiteLayout} from '@/entries/settings/SiteLayout.schema'\nimport {SiteFooter, SiteHeader} from '@/entries/settings/SiteLayout'\n\nexport default async function RootLayout({children}: {children: React.ReactNode}) {\n  const settings = await cms.get({root: cms.workspaces.main.globals, type: SiteLayout})\n\n  return (\n    <html lang='en'>\n      <body>\n        <SiteHeader settings={settings} />\n        {children}\n        <SiteFooter settings={settings} />\n      </body>\n    </html>\n  )\n}",
+      "fileName": "app/layout.tsx",
+      "language": "tsx",
+      "compact": false
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "title": "",
+      "image": {},
+      "description": ""
+    }
+  }
+}
