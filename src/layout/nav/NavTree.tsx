@@ -42,8 +42,10 @@ function NavTreeItem({level, page}: NavTreeItemProps) {
     undefined
   )
   const url = page.url && framework.link(page.url)
+  const behavesAsNestedSection = page.url === '/docs/tutorial'
   const isOpen = Boolean(
-    level < 1 || (showChildren ?? (url && pathname.startsWith(url)))
+    (level < 1 && !behavesAsNestedSection) ||
+      (showChildren ?? (url && pathname.startsWith(url)))
   )
   const isContainer = page.children && page.children.length > 0
   const isActive = pathname === url
@@ -63,7 +65,7 @@ function NavTreeItem({level, page}: NavTreeItemProps) {
                 root: level === 0
               })}
             >
-              {level > 0 &&
+              {(level > 0 || behavesAsNestedSection) &&
                 (isOpen ? (
                   <IcRoundKeyboardArrowDown
                     className={styles.root.link.icon()}
