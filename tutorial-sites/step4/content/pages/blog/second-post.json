@@ -1,0 +1,19 @@
+{
+  "_id": "3ARnewStep4SecondPost",
+  "_type": "PostPage",
+  "_index": "a1",
+  "_seeded": "/blog/second-post.json",
+  "title": "Second post",
+  "path": "second-post",
+  "excerpt": "Another seeded post",
+  "body": "This second post demonstrates previous/next blogpost navigation.",
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "image": {},
+      "title": "",
+      "description": ""
+    }
+  }
+}

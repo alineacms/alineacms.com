@@ -4,7 +4,6 @@ import {cms} from '../../cms'
 import {BlogPageView} from '../../entries/blog/BlogPage'
 import {BlogPostPageView} from '../../entries/blog/BlogPostPage'
 import {BlogPage} from '../../entries/blog/BlogPage.schema'
-import {PostPage} from '../../entries/blog/PostPage.schema'
 import {SitePageView} from '../../entries/page/SitePage'
 import {SitePage} from '../../entries/page/SitePage.schema'
 
@@ -43,9 +42,9 @@ export default async function CatchAllPage({params}: RouteProps) {
   }
 
   if (page._type === 'PostPage') {
-    const postPage = await cms.get({url, type: PostPage})
-    if (!postPage) notFound()
-    return <BlogPostPageView post={postPage} />
+    const postSlug = slug[slug.length - 1]
+    if (!postSlug) notFound()
+    return <BlogPostPageView slug={postSlug} />
   }
 
   const sitePage = await cms.get({url, type: SitePage})

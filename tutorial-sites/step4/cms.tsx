@@ -43,6 +43,15 @@ export const cms = createCMS({
                     excerpt: 'My first post',
                     body: 'Welcome to the blog'
                   }
+                }),
+                'second-post': Config.page({
+                  type: PostPage,
+                  fields: {
+                    title: 'Second post',
+                    path: 'second-post',
+                    excerpt: 'Another seeded post',
+                    body: 'This post enables previous/next post navigation.'
+                  }
                 })
               }
             })

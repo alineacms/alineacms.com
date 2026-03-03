@@ -47,14 +47,14 @@
       "content": [
         {
           "_type": "text",
-          "text": "Implement the blog listing and post detail views using Infer-based prop types."
+          "text": "Implement the blog listing view with Infer-based prop types, then make the post detail page a server component that fetches post and sibling navigation data."
         }
       ]
     },
     {
       "_type": "CodeBlock",
       "_id": "3AOUDMwZfHrD4Rj1a3NYoIiHWuc",
-      "code": "// entries/blog/BlogPage.tsx\nimport {Infer} from 'alinea'\nimport {BlogPage} from './BlogPage.schema'\n\ntype BlogData = Infer<typeof BlogPage>\n\nexport function BlogPageView({page, posts}: {page: BlogData; posts: Array<{id: string; title: string; url: string}>}) {\n  return (\n    <main>\n      <h1>{page.title}</h1>\n      {page.intro && <p>{page.intro}</p>}\n      <ul>\n        {posts.map(post => (\n          <li key={post.id}>\n            <a href={post.url}>{post.title}</a>\n          </li>\n        ))}\n      </ul>\n    </main>\n  )\n}\n\n// entries/blog/BlogPostPage.tsx\nimport {Infer} from 'alinea'\nimport {PostPage} from './PostPage.schema'\n\ntype PostData = Infer<typeof PostPage>\n\nexport function BlogPostPageView({post}: {post: PostData}) {\n  return (\n    <article>\n      <h1>{post.title}</h1>\n      <p>{post.body}</p>\n    </article>\n  )\n}",
+      "code": "// entries/blog/BlogPage.tsx\nimport {Infer} from 'alinea'\nimport {BlogPage} from './BlogPage.schema'\n\ntype BlogData = Infer<typeof BlogPage>\n\nexport function BlogPageView({page, posts}: {page: BlogData; posts: Array<{id: string; title: string; url: string}>}) {\n  return (\n    <main>\n      <h1>{page.title}</h1>\n      {page.intro && <p>{page.intro}</p>}\n      <ul>\n        {posts.map(post => (\n          <li key={post.id}>\n            <a href={post.url}>{post.title}</a>\n          </li>\n        ))}\n      </ul>\n    </main>\n  )\n}\n\n// entries/blog/BlogPostPage.tsx\nimport {Entry} from 'alinea/core/Entry'\nimport {notFound} from 'next/navigation'\nimport {cms} from '../../cms'\nimport {PostPage} from './PostPage.schema'\n\ntype PostLink = {id: string; title: string; url: string; path: string}\n\nexport async function BlogPostPageView({slug}: {slug: string}) {\n  const post = await cms.get({url: `/blog/${slug}`, type: PostPage})\n  if (!post) notFound()\n  const blogPage = (await cms.get({url: '/blog'}))!\n\n  const siblings = await cms.find({\n    parentId: blogPage._id,\n    select: {\n      id: Entry.id,\n      title: Entry.title,\n      url: Entry.url,\n      path: Entry.path\n    }\n  })\n\n  const index = siblings.findIndex(candidate => candidate.path === slug)\n  const previousPost: PostLink | null = index > 0 ? siblings[index - 1] : null\n  const nextPost: PostLink | null = index >= 0 && index < siblings.length - 1 ? siblings[index + 1] : null\n\n  return (\n    <article>\n      <h1>{post.title}</h1>\n      <p>{post.body}</p>\n      {(previousPost || nextPost) && (\n        <nav aria-label=\"Post navigation\">\n          <h2>Next/Previous blogpost</h2>\n          <ul>\n            {previousPost && (\n              <li>\n                <a href={previousPost.url}>Previous: {previousPost.title}</a>\n              </li>\n            )}\n            {nextPost && (\n              <li>\n                <a href={nextPost.url}>Next: {nextPost.title}</a>\n              </li>\n            )}\n          </ul>\n        </nav>\n      )}\n    </article>\n  )\n}",
       "fileName": "entries/blog/*Page.tsx",
       "language": "tsx",
       "compact": false
@@ -65,14 +65,14 @@
       "content": [
         {
           "_type": "text",
-          "text": "Update the Pages root to include the blog entry and seed an initial post."
+          "text": "Update the Pages root to include the blog entry and seed multiple posts."
         }
       ]
     },
     {
       "_type": "CodeBlock",
       "_id": "3AONC7OGaXa2S1uEHArBC9wRAyw",
-      "code": "// cms.tsx (pages root update)\nimport {LandingPage} from '@/entries/landing/LandingPage.schema'\n\nconst pages = Config.root('Pages', {\n  contains: ['LandingPage', 'BlogPage'],\n  children: {\n    index: Config.page({type: LandingPage, fields: {title: 'Welcome', path: ''}}),\n    blog: Config.page({\n      type: BlogPage,\n      fields: {title: 'Blog', path: 'blog', intro: 'Latest posts'},\n      children: {\n        'hello-world': Config.page({\n          type: PostPage,\n          fields: {\n            title: 'Hello world',\n            path: 'hello-world',\n            excerpt: 'My first post',\n            body: 'Welcome to the blog'\n          }\n        })\n      }\n    })\n  }\n})",
+      "code": "// cms.tsx (pages root update)\nimport {LandingPage} from '@/entries/landing/LandingPage.schema'\n\nconst pages = Config.root('Pages', {\n  contains: ['LandingPage', 'BlogPage'],\n  children: {\n    index: Config.page({type: LandingPage, fields: {title: 'Welcome', path: ''}}),\n    blog: Config.page({\n      type: BlogPage,\n      fields: {title: 'Blog', path: 'blog', intro: 'Latest posts'},\n      children: {\n        'hello-world': Config.page({\n          type: PostPage,\n          fields: {\n            title: 'Hello world',\n            path: 'hello-world',\n            excerpt: 'My first post',\n            body: 'Welcome to the blog'\n          }\n        }),\n        'second-post': Config.page({\n          type: PostPage,\n          fields: {\n            title: 'Second post',\n            path: 'second-post',\n            excerpt: 'Another seeded post',\n            body: 'This post enables previous/next post navigation.'\n          }\n        })\n      }\n    })\n  }\n})",
       "fileName": "cms.tsx",
       "language": "tsx",
       "compact": false
@@ -90,7 +90,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3AONCD9vnb4pkvdOWCDPPOmBAab",
-      "code": "// app/blog/page.tsx\nimport {Entry} from 'alinea/core/Entry'\nimport {cms} from '@/cms'\nimport {BlogPageView} from '@/entries/blog/BlogPage'\n\nexport default async function BlogRoute() {\n  const page = await cms.get({url: '/blog'})\n  const posts = await cms.find({\n    parentId: page._id,\n    select: {\n      id: Entry.id,\n      title: Entry.title,\n      url: Entry.url\n    }\n  })\n\n  return <BlogPageView page={page} posts={posts} />\n}\n\n// app/blog/[slug]/page.tsx\nimport {Entry} from 'alinea/core/Entry'\nimport {notFound} from 'next/navigation'\nimport {cms} from '@/cms'\nimport {PostPage} from '@/entries/blog/PostPage.schema'\nimport {BlogPostPageView} from '@/entries/blog/BlogPostPage'\n\nexport async function generateStaticParams() {\n  const urls = await cms.find({\n    type: PostPage,\n    select: Entry.url\n  })\n  return urls.map(url => ({slug: url.split('/').pop()!}))\n}\n\nexport default async function BlogPostRoute({params}: {params: {slug: string}}) {\n  const post = await cms.get({url: `/blog/${params.slug}`})\n  if (!post) notFound()\n  return <BlogPostPageView post={post} />\n}",
+      "code": "// app/blog/page.tsx\nimport {Entry} from 'alinea/core/Entry'\nimport {cms} from '@/cms'\nimport {BlogPageView} from '@/entries/blog/BlogPage'\n\nexport default async function BlogRoute() {\n  const page = await cms.get({url: '/blog'})\n  const posts = await cms.find({\n    parentId: page._id,\n    select: {\n      id: Entry.id,\n      title: Entry.title,\n      url: Entry.url\n    }\n  })\n\n  return <BlogPageView page={page} posts={posts} />\n}\n\n// app/blog/[slug]/page.tsx\nimport {Entry} from 'alinea/core/Entry'\nimport {cms} from '@/cms'\nimport {BlogPostPageView} from '@/entries/blog/BlogPostPage'\nimport {PostPage} from '@/entries/blog/PostPage.schema'\n\nexport async function generateStaticParams() {\n  const paths = await cms.find({\n    type: PostPage,\n    select: Entry.path\n  })\n  return paths.map(slug => ({slug}))\n}\n\nexport default async function BlogPostRoute({params}: {params: {slug: string}}) {\n  return <BlogPostPageView slug={params.slug} />\n}",
       "fileName": "app/blog/page.tsx and app/blog/[slug]/page.tsx",
       "language": "tsx",
       "compact": false

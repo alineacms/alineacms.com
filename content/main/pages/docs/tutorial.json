@@ -31,7 +31,7 @@
       "content": [
         {
           "_type": "text",
-          "text": "Each page type and block type lives in its own folder with a server component and schema file. We found that this is the most convenient structure for readability and maintenance. Every page/block is responsible for collecting additional data/content when necessary. You an turn them into "
+          "text": "Each page type and block type lives in its own folder with a server component and schema file. We found that this is the most convenient structure for readability and maintenance. Every page/block is responsible for collecting additional data/content when necessary. You can turn each server component into "
         },
         {
           "_type": "text",
@@ -48,7 +48,7 @@
         },
         {
           "_type": "text",
-          "text": " when you see fit, giving you a lot of flexibility with maximum performance."
+          "text": " when you see fit, giving you a lot of flexibility with maximum performance. Step 4 demonstrates this with a server-rendered blog post page that fetches sibling posts for Next/Previous navigation."
         }
       ]
     },
