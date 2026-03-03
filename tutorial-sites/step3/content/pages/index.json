@@ -1,0 +1,34 @@
+{
+  "_id": "3AOc3UJoIFuKTMSYaAO51JVAUWM",
+  "_type": "LandingPage",
+  "_index": "a0",
+  "_seeded": "/index.json",
+  "title": "Welcome to Step 3",
+  "blocks": [
+    {
+      "_id": "3AOc3NQucitT3WueQA5YyD3OE1u",
+      "_index": "a0",
+      "_type": "TextBlock",
+      "body": [
+        {
+          "_type": "paragraph",
+          "content": [
+            {
+              "_type": "text",
+              "text": "This is seeded dummy content for the Step 3 landing page."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "image": {},
+      "title": "",
+      "description": ""
+    }
+  }
+}

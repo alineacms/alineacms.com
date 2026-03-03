@@ -1,0 +1,19 @@
+{
+  "_id": "3AOc3Tih1meAXX1m8KzNSeyLd6X",
+  "_type": "PostPage",
+  "_index": "a0",
+  "_seeded": "/blog/hello-world.json",
+  "title": "Hello world",
+  "path": "hello-world",
+  "excerpt": "Seeded post for catch-all routing",
+  "body": "This post is resolved by /[[...slug]] in Step 5.",
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "image": {},
+      "title": "",
+      "description": ""
+    }
+  }
+}

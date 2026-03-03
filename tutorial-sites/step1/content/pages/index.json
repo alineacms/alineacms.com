@@ -1,0 +1,16 @@
+{
+  "_id": "3AOateRQezPAp5Ofli2Qam6X05N",
+  "_type": "LandingPage",
+  "_index": "a0",
+  "_seeded": "/index.json",
+  "title": "Welcome123",
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "image": {},
+      "title": "",
+      "description": ""
+    }
+  }
+}

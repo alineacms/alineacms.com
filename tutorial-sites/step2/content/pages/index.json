@@ -1,0 +1,77 @@
+{
+  "_id": "3AObPZG4JKh7YBgJ1aEbonntdos",
+  "_type": "LandingPage",
+  "_index": "a0",
+  "_seeded": "/index.json",
+  "title": "Welcome",
+  "blocks": [
+    {
+      "_id": "3AObXTSSkR8nhViSvw3yzTHXOdU",
+      "_index": "a0",
+      "_type": "TextBlock",
+      "body": [
+        {
+          "_type": "paragraph",
+          "content": [
+            {
+              "_type": "text",
+              "text": "Test with "
+            },
+            {
+              "_type": "text",
+              "text": "bold text",
+              "marks": [
+                {
+                  "_type": "bold"
+                }
+              ]
+            },
+            {
+              "_type": "text",
+              "text": ". "
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_id": "3AObYiRPm28Wj7gFHbzT4CBbdcn",
+      "_index": "a1",
+      "_type": "ImageBlock",
+      "image": {
+        "_id": "3AObb4xZM1kBInV81gAOLTCZljh",
+        "_type": "image",
+        "_entry": "3AObazssY5ER6VOt1bsIuXztLvb"
+      },
+      "alt": "Dog"
+    },
+    {
+      "_id": "3AObbasdETITnioFgCncfjSJT77",
+      "_index": "a2",
+      "_type": "GalleryBlock",
+      "images": [
+        {
+          "_id": "3AObcdfLwDVfk7klQqdDayqE9An",
+          "_index": "a0",
+          "_type": "image",
+          "_entry": "3AObazssY5ER6VOt1bsIuXztLvb"
+        },
+        {
+          "_id": "3AObcev2dffnSw2qGfDiWiVGZBW",
+          "_index": "a1",
+          "_type": "image",
+          "_entry": "3AObcMsrebXMdxbWwZLeVXPPP3U"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "image": {},
+      "title": "",
+      "description": ""
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "_id": "3AOc3SvSTJIfqSyDqpvCVTcDdaS",
+  "_type": "PostPage",
+  "_index": "a0",
+  "_seeded": "/blog/hello-world.json",
+  "title": "Hello world",
+  "path": "hello-world",
+  "excerpt": "First seeded blog post",
+  "body": "This post is here so Step 4 can be tested immediately.",
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "image": {},
+      "title": "",
+      "description": ""
+    }
+  }
+}

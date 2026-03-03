@@ -1,0 +1,35 @@
+{
+  "_id": "3AOc3TUrMZCt5iWPK7i6KR4vsYy",
+  "_type": "SitePage",
+  "_index": "a0",
+  "_seeded": "/products/enterprise.json",
+  "title": "Enterprise",
+  "path": "enterprise",
+  "blocks": [
+    {
+      "_id": "3AOc7byTLImG5LxPV2ozb9fWaHo",
+      "_index": "a0",
+      "_type": "TextBlock",
+      "body": [
+        {
+          "_type": "paragraph",
+          "content": [
+            {
+              "_type": "text",
+              "text": "Enterprise detail page with seeded dummy content."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "image": {},
+      "title": "",
+      "description": ""
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "_id": "3AOc3TBBg178kowZFBgLt4OzyvV",
+  "_type": "SitePage",
+  "_index": "a0",
+  "_seeded": "/index.json",
+  "title": "Home",
+  "path": "",
+  "blocks": [
+    {
+      "_id": "3AOc3Pde4GwmGkHYxPurDUunEBF",
+      "_index": "a0",
+      "_type": "TextBlock",
+      "body": [
+        {
+          "_type": "paragraph",
+          "content": [
+            {
+              "_type": "text",
+              "text": "This homepage is rendered through the catch-all route in Step 5."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "image": {},
+      "title": "",
+      "description": ""
+    }
+  }
+}

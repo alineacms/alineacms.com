@@ -29,14 +29,14 @@
       "content": [
         {
           "_type": "text",
-          "text": "Define a dedicated entry type for shared layout content used site-wide."
+          "text": "Define a dedicated entry type for shared layout content used site-wide, and disable preview for this global settings entry."
         }
       ]
     },
     {
       "_type": "CodeBlock",
       "_id": "3AONCBs88Rae2Yvlxuo1F6kMkwe",
-      "code": "// entries/settings/SiteLayout.schema.tsx\nimport {Config, Field} from 'alinea'\n\nexport const SiteLayout = Config.document('Site layout', {\n  fields: {\n    title: Field.text('Entry title', {initialValue: 'Global settings'}),\n    path: Field.path('Path', {readOnly: true, initialValue: 'settings'}),\n    headerText: Field.text('Header text', {required: true}),\n    footerText: Field.text('Footer text', {required: true})\n  }\n})",
+      "code": "// entries/settings/SiteLayout.schema.tsx\nimport {Config, Field} from 'alinea'\n\nexport const SiteLayout = Config.document('Site layout', {\n  preview: false,\n  fields: {\n    title: Field.text('Entry title', {initialValue: 'Global settings'}),\n    path: Field.path('Path', {readOnly: true, initialValue: 'settings'}),\n    headerText: Field.text('Header text', {required: true}),\n    footerText: Field.text('Footer text', {required: true})\n  }\n})",
       "fileName": "entries/settings/SiteLayout.schema.tsx",
       "language": "tsx",
       "compact": false

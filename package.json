@@ -7,7 +7,12 @@
     "ensure:alinea": "bash scripts/ensure-alinea.sh > /dev/null",
     "dev": "alinea dev -- next dev",
     "build": "alinea build -- next build",
-    "start": "next start"
+    "start": "next start",
+    "step1:dev": "bun run --cwd tutorial-sites/step1 dev",
+    "step2:dev": "bun run --cwd tutorial-sites/step2 dev",
+    "step3:dev": "bun run --cwd tutorial-sites/step3 dev",
+    "step4:dev": "bun run --cwd tutorial-sites/step4 dev",
+    "step5:dev": "bun run --cwd tutorial-sites/step5 dev"
   },
   "dependencies": {
     "@alinea/styler": "^1.0.3",
