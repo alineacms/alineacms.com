@@ -31,7 +31,24 @@
       "content": [
         {
           "_type": "text",
-          "text": "All schema definitions are shown in cms.tsx. Each page type and block type still lives in its own folder with a server component and schema file."
+          "text": "Each page type and block type lives in its own folder with a server component and schema file. We found that this is the most convenient structure for readability and maintenance. Every page/block is responsible for collecting additional data/content when necessary. You an turn them into "
+        },
+        {
+          "_type": "text",
+          "text": "cache components",
+          "marks": [
+            {
+              "_type": "link",
+              "_id": "3AR0sSBtNppAOz9pfiIk8ZrUQCO",
+              "_link": "url",
+              "href": "https://nextjs.org/docs/app/getting-started/cache-components",
+              "target": "_blank"
+            }
+          ]
+        },
+        {
+          "_type": "text",
+          "text": " when you see fit, giving you a lot of flexibility with maximum performance."
         }
       ]
     },
@@ -50,8 +67,8 @@
     "title": "",
     "description": "",
     "openGraph": {
-      "title": "",
       "image": {},
+      "title": "",
       "description": ""
     }
   }
