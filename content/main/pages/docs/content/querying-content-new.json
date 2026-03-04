@@ -1,0 +1,170 @@
+{
+  "_id": "3AUAiIoQhl86EKefhuhZ6EThETv",
+  "_type": "Doc",
+  "_index": "a3",
+  "title": "Querying content NEW",
+  "navigationTitle": "",
+  "body": [
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Once content has been saved in the CMS you'll want a way to retrieve it. Your CMS instance has methods to fetch specific Entries or search through all content."
+        }
+      ]
+    },
+    {
+      "_type": "paragraph"
+    },
+    {
+      "_type": "FrameworkBlock",
+      "_id": "2YlCk9I5mZXiCO3tbjj941PI9rc",
+      "next": [
+        {
+          "_type": "paragraph",
+          "textAlign": "left",
+          "content": [
+            {
+              "_type": "text",
+              "text": "Content can be queried within React server components (and functions that run on the server such as generateStaticParams)."
+            }
+          ]
+        },
+        {
+          "_type": "CodeBlock",
+          "_id": "2YlCpSWtMLknsvHhIwtZlTf1MDI",
+          "code": "import {cms} from '@/cms'\n\nexport default async function HomePage() {\n  const homePage = await cms.get({type: HomePage})\n  return <h1>{homePage.title}</h1>\n}",
+          "fileName": "",
+          "language": "",
+          "compact": false
+        }
+      ]
+    },
+    {
+      "_type": "heading",
+      "level": 2,
+      "content": [
+        {
+          "_type": "text",
+          "text": "Methods"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "There are multiple ways to get your data, which one you use depends on how you want to receive that data"
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AUBKJWUNSfv45rLqQFHcCfj5FA",
+      "code": "cms.find() // Always returns an array\n\ncms.first() // Returns the first result or null\ncms.get() // Returns only one result (use only when you are sure it exists)\n\ncms.count() // Returns the amount of results",
+      "fileName": "",
+      "language": ""
+    },
+    {
+      "_type": "heading",
+      "level": 2,
+      "content": [
+        {
+          "_type": "text",
+          "text": "Filter"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "After deciding how you want to receive your data we need to tell the cms where to look for the data. Here we can easily divide our options into 4 groups"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph"
+    },
+    {
+      "_type": "heading",
+      "level": 3,
+      "content": [
+        {
+          "_type": "text",
+          "text": "1. Exact search"
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AUGWShqMFRj0JtbCa7Y1cXW15m",
+      "code": "cms.first({\n  id: pageId,\n  path: pagePath,\n  url: pageUrl,\n  parentId: pageParentId\n})",
+      "fileName": "",
+      "language": ""
+    },
+    {
+      "_type": "heading",
+      "level": 3,
+      "content": [
+        {
+          "_type": "text",
+          "text": "2. Location in the tree structure"
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AUGagq5lVCSs24yNtognDcd4W1",
+      "code": "cms.first({\n  workspace,\n  root,\n  level,\n\n  // Can use a Root, Workspace or a Page as input\n  location\n})",
+      "fileName": "",
+      "language": ""
+    },
+    {
+      "_type": "heading",
+      "level": 3,
+      "content": [
+        {
+          "_type": "text",
+          "text": "3. Advanced searching"
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AUGdlVZHOAuEtESreV3OoX4Ixm",
+      "code": "cms.first({\n  // Filter by the schema\n  type: BlogPost,\n  // Filter using search terms\n  search,\n  // Filter by fields\n  filter: {\n    author: 'alinea',\n    publishedDate: {\n      lt: '2024-01-01',\n      gte: '2023-01-01'\n    }\n  }\n})",
+      "fileName": "",
+      "language": ""
+    },
+    {
+      "_type": "heading",
+      "level": 3,
+      "content": [
+        {
+          "_type": "text",
+          "text": "4. Miscellaneous"
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AUCfiqN9GE7kQlDsH3ROyTduA6",
+      "code": "cms.first({\n  // This can be: 'published', 'draft', 'archived', 'preferDraft', 'preferPublished', 'all' \n  status: 'published',\n  // Look for result with the exact locale  \n  locale: pageLocale \n  // Look for a result with the locale, but ignore when there are no exact matches\n  preferredLocale: pageLocale \n})",
+      "fileName": "",
+      "language": ""
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "image": {},
+      "title": "",
+      "description": ""
+    }
+  }
+}
