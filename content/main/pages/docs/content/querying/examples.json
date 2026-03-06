@@ -1,0 +1,106 @@
+{
+  "_id": "3AZY63OxjiPWzVM4siKRVbqLNF1",
+  "_type": "Doc",
+  "_index": "a1",
+  "title": "Examples",
+  "navigationTitle": "",
+  "body": [
+    {
+      "_type": "heading",
+      "level": 2,
+      "content": [
+        {
+          "_type": "text",
+          "text": "Recent Content & Pagination"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "This example shows how to retrieve the most recent entries while implementing a reusable pagination logic. By using constants for pageLength, you keep your query logic clean and easy to maintain."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AZuCIlq3RXaKdbztvaz5rVCIsA",
+      "code": "const pageLength = 10\nconst pageIndex = 0 // Start at the first page\n\ncms.find({\n  type: BlogPost,\n  // Sort by date to get the newest items first\n  orderBy: { \n    desc: BlogPost.publishedDate \n  },\n  // Calculate offset based on the current page\n  skip: pageIndex * pageLength,\n  take: pageLength\n})",
+      "fileName": "",
+      "language": ""
+    },
+    {
+      "_type": "heading",
+      "level": 2,
+      "content": [
+        {
+          "_type": "text",
+          "text": "Filtering by linked references "
+        }
+      ]
+    },
+    {
+      "_type": "heading",
+      "level": 3,
+      "content": [
+        {
+          "_type": "text",
+          "text": "OR Logic"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Use this approach when you want to retrieve entries that are linked to one or more specific items. This is particularly useful for features like \"Filtering by Category\" or \"View all posts by these Authors.\""
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AZiyHPw7uDo7kI54QMwdWu6Gnu",
+      "code": "const filterIds = [\n  'abc123',\n  'def456'\n]\n\ncms.find({\n  type: ChildSchema,\n  filter: {\n    filters: {\n      includes: {_entry: {in: filterIds}}\n    }\n  }\n})",
+      "fileName": "",
+      "language": ""
+    },
+    {
+      "_type": "heading",
+      "level": 3,
+      "content": [
+        {
+          "_type": "text",
+          "text": "AND Logic"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "If you need to find entries that contain all specified references simultaneously, you can map over your IDs using an and operator. This ensures every single link in your list must be present for a match."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AZi7kjJLXFnA21Agey2DjkAmhD",
+      "code": "const filterIds = [\n  'abc123',\n  'def456'\n]\n\ncms.find({\n  type: ChildSchema,\n  filter: {\n    and: filterIds.map(id => ({\n      filters: {includes: {_entry: id}}\n    }))\n  }\n})",
+      "fileName": "",
+      "language": ""
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "image": {},
+      "title": "",
+      "description": ""
+    }
+  }
+}

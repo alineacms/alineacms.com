@@ -1,0 +1,76 @@
+{
+  "_id": "3AZCsyar65l8ytkp44ZL2C4aCG2",
+  "_type": "Docs",
+  "_index": "a18",
+  "title": "Querying content",
+  "navigationTitle": "",
+  "body": [
+    {
+      "_type": "heading",
+      "level": 2,
+      "content": [
+        {
+          "_type": "text",
+          "text": "Setup"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Once content has been saved in the CMS you'll want a way to retrieve it. Your CMS instance has methods to fetch specific entries or search through all content."
+        }
+      ]
+    },
+    {
+      "_type": "FrameworkBlock",
+      "_id": "3AZD3ZVXGfpX3sexOWhGtvJJjuC",
+      "next": [
+        {
+          "_type": "CodeBlock",
+          "_id": "3AZD4qVCNAQAqmAaVEtnFzxdUlU",
+          "code": "import {cms} from '@/cms'\n\nexport default async function HomePage() {\n  const homePage = await cms.get({type: HomePage})\n  return <h1>{homePage.title}</h1>\n}",
+          "fileName": "",
+          "language": ""
+        }
+      ]
+    },
+    {
+      "_type": "heading",
+      "level": 2,
+      "content": [
+        {
+          "_type": "text",
+          "text": "Methods"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "There are multiple ways to retrieve your data, which one you use depends on how you want to receive it."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AZmHwGgMIvbj496GIZA4l3v5VV",
+      "code": "// Always returns an array\ncms.find() \n\n// Returns the first result or null\ncms.first() \n// Returns only one result (use only when you are sure it exists)\ncms.get() \n\n// Returns the number of results\ncms.count() ",
+      "fileName": "",
+      "language": ""
+    }
+  ],
+  "metadata": {
+    "title": "",
+    "description": "",
+    "openGraph": {
+      "image": {},
+      "title": "",
+      "description": ""
+    }
+  }
+}
