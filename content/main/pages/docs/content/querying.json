@@ -59,7 +59,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3AZmHwGgMIvbj496GIZA4l3v5VV",
-      "code": "// Always returns an array\nawait cms.find() \n\n// Returns the first result or null\nawait cms.first() \n// Returns only one result (use only when you are sure it exists)\nawait cms.get() \n\n// Returns the number of results\nawait cms.count() ",
+      "code": "// Always returns an array\nawait cms.find() \n\n// Returns the first result or null\nawait cms.first() \n// Returns only one result or throws an exception\nawait cms.get() \n\n// Returns the number of results\nawait cms.count() ",
       "fileName": "",
       "language": ""
     },
@@ -95,7 +95,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3Ahp3VtFjwf6fQxc1uZACtRlcVH",
-      "code": "// Query.id                The unique identifier of the entry.\n// Query.title             The title of the entry.\n// Query.type              The name of the entry's type (e.g., 'BlogPost').\n// Query.url               The calculated public URL of the entry.\n// Query.path              The path segment of the entry (e.g., 'my-post').\n// Query.parentId          The ID of the parent entry.\n// Query.workspace         The workspace the entry belongs to.\n// Query.root              The root the entry belongs to.\n// Query.locale            The locale code of the entry (e.g., 'en', 'fr').\n// Query.status            The status of the entry (e.g., 'published').\n// Query.index             The sort index of the entry within its parent.",
+      "code": "Query.id                // The unique identifier of the entry.\nQuery.title             // The title of the entry.\nQuery.type              // The name of the entry's type (e.g., 'BlogPost').\nQuery.url               // The calculated public URL of the entry.\nQuery.path              // The path segment of the entry (e.g., 'my-post').\nQuery.parentId          // The ID of the parent entry.\nQuery.workspace         // The workspace the entry belongs to.\nQuery.root              // The root the entry belongs to.\nQuery.locale            // The locale code of the entry (e.g., 'en', 'fr').\nQuery.status            // The status of the entry (e.g., 'published').\nQuery.index             // The sort index of the entry within its parent.",
       "fileName": "",
       "language": ""
     },
