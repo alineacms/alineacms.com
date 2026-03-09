@@ -15,9 +15,6 @@
       ]
     },
     {
-      "_type": "paragraph"
-    },
-    {
       "_type": "heading",
       "level": 2,
       "content": [
@@ -405,7 +402,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3Ahwa7yMlETIJ4wuAZEMy6pdx5E",
-      "code": "// Block acces to certain roots, give read and update rights to everything else\nconst editor = Config.role('Editor', {\n  async permissions(policy) {\n    policy.set(\n      {\n        allow: {read: true, update: true}\n      },\n      {\n        root: cms.workspaces.main.general,\n        deny: {read: true}\n      },\n      {\n        root: cms.workspaces.main.redirects,\n        deny: {read: true}\n      },\n      {\n        root: cms.workspaces.main.configurator,\n        deny: {read: true}\n      },\n      {\n        root: cms.workspaces.main.database,\n        deny: {read: true}\n      }\n    )\n  }\n})",
+      "code": "// Block access to certain roots, give read and update rights to everything else\nconst editor = Config.role('Editor', {\n  async permissions(policy) {\n    policy.set(\n      {\n        allow: {read: true, update: true}\n      },\n      {\n        root: cms.workspaces.main.general,\n        deny: {read: true}\n      },\n      {\n        root: cms.workspaces.main.redirects,\n        deny: {read: true}\n      },\n      {\n        root: cms.workspaces.main.configurator,\n        deny: {read: true}\n      },\n      {\n        root: cms.workspaces.main.database,\n        deny: {read: true}\n      }\n    )\n  }\n})",
       "fileName": "",
       "language": ""
     },
@@ -457,7 +454,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3Ai34341S0rJQ1xXiauCpkPo35K",
-      "code": "bikeBrandId = '2o7I2ig8ry0ci1e0hZ5k1kKK3Qx'\n\n// Use querying to show only specific products\nconst bikeBrandModerator = Config.role('Bike Brand Moderator', {\n  async permissions(policy, graph) {\n    const bikes = await graph.find({\n      type: ProductSchema,\n      filter: {\n        brand: {\n          has: {_entry: bikeBrandId}\n        }\n      }\n    })\n    policy.set({\n      workspace: cms.workspaces.main,\n      allow: {read: true},\n      grant: 'explicit'\n    },\n    {\n    root: cms.workspaces.main.products,\n      allow: {read: true},\n      grant: 'explicit'\n    })\n    for (const bike of bikes) {\n      policy.set({\n        id: bike._id,\n        allow: {read: true, update: true}\n      })\n    }\n  }\n})",
+      "code": "const bikeBrandId = '2o7I2ig8ry0ci1e0hZ5k1kKK3Qx'\n\n// Use querying to show only specific products\nconst bikeBrandModerator = Config.role('Bike Brand Moderator', {\n  async permissions(policy, graph) {\n    const bikes = await graph.find({\n      type: ProductSchema,\n      filter: {\n        brand: {\n          has: {_entry: bikeBrandId}\n        }\n      }\n    })\n    policy.set({\n      workspace: cms.workspaces.main,\n      allow: {read: true},\n      grant: 'explicit'\n    },\n    {\n    root: cms.workspaces.main.products,\n      allow: {read: true},\n      grant: 'explicit'\n    })\n    for (const bike of bikes) {\n      policy.set({\n        id: bike._id,\n        allow: {read: true, update: true}\n      })\n    }\n  }\n})",
       "fileName": "",
       "language": ""
     }
