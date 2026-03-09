@@ -134,7 +134,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3AZMTVraRggRKFpls9fimCdP3hN",
-      "code": "await cms.first({\n  type: BlogPostSchema,\n  search: 'querying',\n})",
+      "code": "await cms.find({\n  type: BlogPostSchema,\n  search: 'querying',\n})\n\n//You can also pass an array into the search, it then works like a logical OR\nawait cms.first({\n  type: BlogPostSchema,\n  search: ['cats', 'dogs'], // This will return all blogposts containing cats or dogs\n})\n",
       "fileName": "",
       "language": ""
     }
