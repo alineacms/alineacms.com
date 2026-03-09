@@ -26,14 +26,14 @@
       "content": [
         {
           "_type": "text",
-          "text": "Let's take using a date as a filter for example as this lets us show quite a few of your options"
+          "text": "Let's take using a date as a filter for example as this lets us show quite a few of your options."
         }
       ]
     },
     {
       "_type": "CodeBlock",
       "_id": "3AZJubgfIQG4gYAhR3BCatZf6lz",
-      "code": "/*\nDate filter helpers:\n\nlt  = less than            gt = greater than\nlte = less than or equal  gte = greater than or equal\n*/\nconst today = new Date().toISOString()\n\n// Getting the posts published in 2023\ncms.find({\n  type: BlogPostSchema,\n  \n  filter: {\n    author: 'alinea',\n    publishedDate: {\n      lt: '2024-01-01',\n      gte: '2023-01-01'\n    }\n  }\n})\n\n// Getting future events\ncms.find({\n  type: Event,\n\n  filter: {\n    date: {gte: today}\n  }\n})",
+      "code": "/*\nDate filter helpers:\nlt  = less than            \nlte = less than or equal  \n\ngt = greater than\ngte = greater than or equal\n*/\n\nconst today = new Date().toISOString()\n\n// Getting the posts published in 2023\ncms.find({\n  type: BlogPostSchema,\n  \n  filter: {\n    author: 'alinea',\n    publishedDate: {\n      lt: '2024-01-01',\n      gte: '2023-01-01'\n    }\n  }\n})\n\n// Getting future events\ncms.find({\n  type: Event,\n\n  filter: {\n    date: {gte: today}\n  }\n})",
       "fileName": "",
       "language": ""
     }

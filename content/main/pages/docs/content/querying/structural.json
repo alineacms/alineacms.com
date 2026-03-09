@@ -37,7 +37,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3AUGWShqMFRj0JtbCa7Y1cXW15m",
-      "code": "const pageIds = ['abc123', 'def456', 'ghi789']\ncms.first({\n  // Filter by the schema.\n  type: BlogPostSchema,\n\n  // When you know the unique id.\n  id: pageId,\n  // You can also use operations in these fields.\n  id: {in: pageIds}\n  id: {notIn: pageIds}\n\n  // Using the path (e.g. querying).\n  path: pagePath,\n\n  // Using the url (e.g. docs/content/query)\n  url: pageUrl,\n  // But sometimes you only need the URL to start with a certain prefix\n  // instead of using javascript string manipulation you can use the startsWith field\n  url: {\n    startsWith: 'docs/content'\n  }\n\n  // Using the parents id\n  parentId: pageParentId  \n})",
+      "code": "const pageIds = ['abc123', 'def456', 'ghi789']\ncms.first({\n  // Filter by the schema.\n  type: BlogPostSchema,\n\n  // When you know the unique id\n  id: pageId,\n  // You can also use operations in these fields\n  id: {in: pageIds}\n  id: {notIn: pageIds}\n\n  // Using the path (e.g. querying).\n  path: pagePath,\n\n  // Using the url (e.g. docs/content/query)\n  url: pageUrl,\n  // But sometimes you only need the URL to start with a certain prefix\n  // instead of using javascript string manipulation you can use the startsWith field\n  url: {startsWith: 'docs/content'}\n\n  // Using the parents id\n  parentId: pageParentId  \n})",
       "fileName": "",
       "language": ""
     },
@@ -54,7 +54,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3AUGagq5lVCSs24yNtognDcd4W1",
-      "code": "cms.first({\n  workspace,\n  root,\n  // Level: 0 = parent level, 1 = child level, 2 = grandchild level, ...\n  level,\n\n  // Can use a Root, Workspace or a Page as input\n  // e.g. cms.workspaces.main | cms.workspaces.main.pages\n  location\n})",
+      "code": "cms.first({\n  // e.g. cms.workspaces.main\n  workspace,\n  // e.g. cms.workspaces.main.pages\n  root,\n  // Level: 0 = parent level, 1 = child level, 2 = grandchild level, ...\n  level,\n\n  // For Location you can use a Root, Workspace or a Page as input.\n  // e.g. cms.workspaces.main | cms.workspaces.main.pages\n  location\n})",
       "fileName": "",
       "language": ""
     },
@@ -71,7 +71,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3AUCfiqN9GE7kQlDsH3ROyTduA6",
-      "code": "cms.first({\n  // This can be: 'published', 'draft', 'archived', 'preferDraft', 'preferPublished', 'all' \n  status: 'published',\n  // Look for result with the exact locale  \n  locale: pageLocale \n  // Look for a result with the locale, but ignore when there are no exact matches\n  preferredLocale: pageLocale \n})",
+      "code": "cms.first({\n  // This can be: 'published', 'draft', 'archived', 'preferDraft', 'preferPublished', 'all' \n  status: 'published',\n  // Look for result with the exact locale.\n  locale: pageLocale \n  // Look for a result with the locale, but ignore when there are no exact matches\n  preferredLocale: pageLocale \n})",
       "fileName": "",
       "language": ""
     },

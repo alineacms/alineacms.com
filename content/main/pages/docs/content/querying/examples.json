@@ -92,6 +92,44 @@
       "code": "const filterIds = [\n  'abc123',\n  'def456'\n]\n\ncms.find({\n  type: ChildSchema,\n  filter: {\n    and: filterIds.map(id => ({\n      filters: {includes: {_entry: id}}\n    }))\n  }\n})",
       "fileName": "",
       "language": ""
+    },
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "This pattern demonstrates how to find related content by comparing shared references. First, we retrieve the current entry to extract its linked metadata. Then, we use those IDs to query other entries of the same type, ensuring the current item is excluded from the results to provide a clean list of recommendations."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AhXg5DkOjrmVLau0jaMwvx5SOI",
+      "code": "// Define your current context\nconst locale = 'en'\nconst url = '/docs/current-page'\n\nconst page = await cms.first({locale, url, type: ChildSchema})\nif (!page) return\nconst filterIds = page.filters.map(filter => filter?._entry).filter(Boolean)\n\nconst other = await cms.find({\n  type: ChildSchema,\n  id: {notIn: [page._id]},\n    filter: {\n      filters: {\n        includes: {_entry: {in: filterIds}}\n      }\n    },\n  select: {title: Query.title}\n})",
+      "fileName": "",
+      "language": ""
+    },
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "In the previous example we hardcoded the locale and url, but it's very likely that your framework supports some sort of routing params:"
+        }
+      ]
+    },
+    {
+      "_type": "FrameworkBlock",
+      "_id": "3Ahe1VBpFEQzpFms0S0qH7ekgkj",
+      "next": [
+        {
+          "_type": "CodeBlock",
+          "_id": "3Ahe5K3PePHW5DZopeFrS9LCUiJ",
+          "code": "type ChildProps = {locale: Locale; url: string}\n\nexport default async function Child({locale, url}: ChildProps) {\n\n  ...\n\n}",
+          "fileName": "",
+          "language": ""
+        }
+      ]
     }
   ],
   "metadata": {

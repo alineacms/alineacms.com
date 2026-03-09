@@ -59,14 +59,14 @@
       "content": [
         {
           "_type": "text",
-          "text": "By default, providing an array of values to a filter field or using the { in: [...] } operator will apply OR logic. This means the query will return any entry that matches at least one of the specified criteria. It is the most efficient way to broaden your search across multiple possible values, such as categories or tags."
+          "text": "By default, providing an array of values to a filter field or using the {in: [...]} operator will apply OR logic. This means the query will return any entry that matches at least one of the specified criteria. It is the most efficient way to broaden your search across multiple possible values, such as categories or tags."
         }
       ]
     },
     {
       "_type": "CodeBlock",
       "_id": "3AZrw7kzKzdBiOhvT2qozwEV7kl",
-      "code": "cms.find({\n  type: ChildSchema,\n  filters: {\n    // Return results that have a linked entry with id 'abc' OR 'def'\n    includes: { _entry: { in: ['abc', 'def'] } }\n  }\n})",
+      "code": "cms.find({\n  type: ChildSchema,\n  filter: {\n    category: {in: ['abc', 'def']}\n  }\n})",
       "fileName": "",
       "language": ""
     },
@@ -82,7 +82,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3AZsa6F0PPDaxiAkihTLF1Unc7v",
-      "code": "cms.find({\n  type: BlogPostSchema,\n  filter: {\n    or: [\n      { author: 'alinea' },\n      { category: 'news' }\n    ]\n  }\n})",
+      "code": "cms.find({\n  type: BlogPostSchema,\n  filter: {\n    or: [\n      {author: 'alinea'},\n      {category: 'news'}\n    ]\n  }\n})",
       "fileName": "",
       "language": ""
     },
@@ -108,7 +108,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3AZs3iwwE6V75J5GHAMuKoABQAo",
-      "code": "cms.find({\n  type: ChildSchema,\n  filter: {\n    // Use .map to create a filter condition for each ID\n    and: ['abc', 'def'].map(id => ({\n      filters: { includes: { _entry: id } }\n    }))\n  }\n})",
+      "code": "cms.find({\n  type: ChildSchema,\n  filter: {\n    // Use .map to create a filter condition for each ID\n    and: ['abc', 'def'].map(id => ({\n      filters: {includes: { _entry: id }}\n    }))\n  }\n})",
       "fileName": "",
       "language": ""
     },
