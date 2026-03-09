@@ -2,7 +2,7 @@
   "_id": "3AZFJMpiZHNpL8Uv1wFYpPYeHJR",
   "_type": "Doc",
   "_index": "a0",
-  "title": "Advanced ",
+  "title": "Advanced",
   "navigationTitle": "",
   "body": [
     {
@@ -40,13 +40,13 @@
       "content": [
         {
           "_type": "text",
-          "text": "Query Logic "
+          "text": "Query Logic"
         }
       ]
     },
     {
       "_type": "heading",
-      "level": 4,
+      "level": 3,
       "content": [
         {
           "_type": "text",
@@ -88,7 +88,7 @@
     },
     {
       "_type": "heading",
-      "level": 4,
+      "level": 3,
       "content": [
         {
           "_type": "text",
@@ -114,7 +114,7 @@
     },
     {
       "_type": "heading",
-      "level": 3,
+      "level": 2,
       "content": [
         {
           "_type": "text",
