@@ -27,7 +27,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3AZDfgNuyvDrRCXueFTIRZNyt0k",
-      "code": "cms.first({\n  type: DocsSchema,\n  include: {\n    parents: Query.parents({\n      select: {\n        url: Query.url, \n        title: Query.title\n      }\n    })  \n    children: Query.children({\n      type: Doc, \n      select: {\n        url: Query.url, \n        title: Query.title\n      }\n    })    \n    siblings: Query.siblings({\n      type: Docs, \n      select: {\n        url: Query.url, \n        title: Query.title\n      }\n    })\n  }\n})",
+      "code": "await cms.first({\n  type: DocsSchema,\n  include: {\n    parents: Query.parents({\n      select: {\n        url: Query.url, \n        title: Query.title\n      }\n    })  \n    children: Query.children({\n      type: Doc, \n      select: {\n        url: Query.url, \n        title: Query.title\n      }\n    })    \n    siblings: Query.siblings({\n      type: Docs, \n      select: {\n        url: Query.url, \n        title: Query.title\n      }\n    })\n  }\n})",
       "fileName": "",
       "language": ""
     },
@@ -53,7 +53,33 @@
     {
       "_type": "CodeBlock",
       "_id": "3AZG9A84rsohhbr2FBWChmX75ey",
-      "code": "cms.first({\n  type: DocSchema,\n  \n  include: {   \n    previous: Query.previous({\n      select: {\n        url: Query.url, \n        title: Query.title\n      }\n    })\n    next: Query.next({\n      select: {\n        url: Query.url, \n        title: Query.title\n      }\n    })\n  }\n})",
+      "code": "await cms.first({\n  type: DocSchema,\n  \n  include: {   \n    previous: Query.previous({\n      select: {\n        url: Query.url, \n        title: Query.title\n      }\n    })\n    next: Query.next({\n      select: {\n        url: Query.url, \n        title: Query.title\n      }\n    })\n  }\n})",
+      "fileName": "",
+      "language": ""
+    },
+    {
+      "_type": "heading",
+      "level": 2,
+      "content": [
+        {
+          "_type": "text",
+          "text": "Translations"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Fetches translations of the current entry by locale."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AhmNQsSi13caMLpuBk49bSIk2Y",
+      "code": "await cms.first({\n  type: DocSchema,\n  \n  include: {   \n    translations: Query.translations({\n      select: {locale: Query.locale, url: Query.url}\n    })\n  }\n})",
       "fileName": "",
       "language": ""
     }
