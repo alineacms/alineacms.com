@@ -1,9 +1,7 @@
-import {cms} from '../cms'
-import {LandingPageView} from '../entries/landing/LandingPage'
-import {LandingPage} from '../entries/landing/LandingPage.schema'
+import {LandingPageView} from '@/entries/landing/LandingPage'
 
-export default async function Page() {
-  const page = await cms.get({url: '/', type: LandingPage})
-  if (!page) return <main>No landing page found</main>
-  return <LandingPageView page={page} />
+export {generateMetadata} from '@/entries/landing/LandingPage'
+
+export default function Page() {
+  return <LandingPageView />
 }

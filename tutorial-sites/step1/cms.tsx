@@ -1,6 +1,6 @@
 import {Config} from 'alinea'
 import {createCMS} from 'alinea/next'
-import {LandingPage} from './entries/landing/LandingPage.schema'
+import {LandingPage} from '@/entries/landing/LandingPage.schema'
 
 export const cms = createCMS({
   schema: {LandingPage},

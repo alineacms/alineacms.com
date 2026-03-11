@@ -3,14 +3,18 @@
   "_type": "LandingPage",
   "_index": "a0",
   "_seeded": "/index.json",
-  "title": "Welcome123",
+  "title": "Welcome",
   "metadata": {
-    "title": "",
-    "description": "",
+    "title": "Regular metatitle",
+    "description": "Regular meta description.",
     "openGraph": {
-      "image": {},
-      "title": "",
-      "description": ""
+      "image": {
+        "_id": "3AnxPTiGgX0Hm25APgSQ8m0Twdf",
+        "_type": "image",
+        "_entry": "3AnxOwGUFr3uFx7K6WVX8BV9ajY"
+      },
+      "title": "OG title",
+      "description": "OG description"
     }
   }
 }

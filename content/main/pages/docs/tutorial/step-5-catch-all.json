@@ -18,7 +18,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3AONyof32uSAsVKwWOVlZSoYACo",
-      "code": "app/\n├ layout.tsx\n╰ [[...slug]]/page.tsx\n\nentries/\n├ landing/\n│ ├ LandingPage.tsx\n│ ╰ LandingPage.schema.tsx\n├ blog/\n│ ├ BlogPage.tsx\n│ ├ BlogPostPage.tsx\n│ ├ BlogPage.schema.tsx\n│ ╰ PostPage.schema.tsx\n├ settings/\n│ ├ SiteLayout.tsx\n│ ╰ SiteLayout.schema.tsx\n╰ page/\n  ╰ SitePage.schema.tsx\n\nblocks/\n├ text/\n│ ├ TextBlock.tsx\n│ ╰ TextBlock.schema.tsx\n├ image/\n│ ├ ImageBlock.tsx\n│ ╰ ImageBlock.schema.tsx\n╰ gallery/\n  ├ GalleryBlock.tsx\n  ╰ GalleryBlock.schema.tsx\n\ncms.tsx",
+      "code": "app/\n├ layout.tsx\n╰ [[...slug]]/page.tsx\n\nentries/\n├ landing/\n│ ├ LandingPage.tsx\n│ ╰ LandingPage.schema.tsx\n├ blog/\n│ ├ BlogPage.tsx\n│ ├ PostPage.tsx\n│ ├ BlogPage.schema.tsx\n│ ╰ PostPage.schema.tsx\n├ settings/\n│ ├ SiteLayout.tsx\n│ ╰ SiteLayout.schema.tsx\n╰ page/\n  ╰ SitePage.schema.tsx\n\nblocks/\n├ text/\n│ ├ TextBlock.tsx\n│ ╰ TextBlock.schema.tsx\n├ image/\n│ ├ ImageBlock.tsx\n│ ╰ ImageBlock.schema.tsx\n╰ gallery/\n  ├ GalleryBlock.tsx\n  ╰ GalleryBlock.schema.tsx\n\ncms.tsx",
       "fileName": "project structure",
       "language": "",
       "compact": false

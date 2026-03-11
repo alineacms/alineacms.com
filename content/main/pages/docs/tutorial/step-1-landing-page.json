@@ -7,18 +7,36 @@
   "body": [
     {
       "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "We are gonna working towards setting up a welcome page, served on the root domain of the website. The page will simply print the title of the page, which can be adjusted in the CMS."
+        }
+      ]
+    },
+    {
+      "_type": "ImageBlock",
+      "_id": "3Anq6LCiXl12kFfHgytQAYdl5cO",
+      "image": {
+        "_id": "3Anq6t99XZhoTpgwt43afQsUmfk",
+        "_type": "image",
+        "_entry": "3Anq0ll2U8o6fYfLX2n5OknthUJ"
+      }
+    },
+    {
+      "_type": "paragraph",
       "textAlign": "left",
       "content": [
         {
           "_type": "text",
-          "text": "Start with one CMS entry for your landing page. Its path is fixed to an empty string so it always resolves to /."
+          "text": "We recommend creating a single component file for every page. In this case we call it LandingPage.tsx. This React component will be accompagnied by a schema file, which defines the fields of this page."
         }
       ]
     },
     {
       "_type": "CodeBlock",
       "_id": "3AONylaqcfOBvfq6SBaJh9zwYEP",
-      "code": "app/\n╰ page.tsx\n\nentries/\n╰ landing/\n  ├ LandingPage.tsx\n  ╰ LandingPage.schema.tsx\n\ncms.tsx",
+      "code": "app/\n╰ page.tsx\n╰ layout.tsx\n\nentries/\n╰ landing/\n  ├ LandingPage.tsx\n  ╰ LandingPage.schema.tsx\n\ncms.tsx",
       "fileName": "project structure",
       "language": "",
       "compact": false
@@ -29,14 +47,14 @@
       "content": [
         {
           "_type": "text",
-          "text": "Start by defining the landing entry schema in its own file."
+          "text": "We start by defining the landing entry schema in its own file. Its path is fixed to an empty string and made read only so it always resolves to /."
         }
       ]
     },
     {
       "_type": "CodeBlock",
       "_id": "3AONC7AhYb0QcGKsM21ZfmIN3VT",
-      "code": "// entries/landing/LandingPage.schema.tsx\nimport {Config, Field} from 'alinea'\n\nexport const LandingPage = Config.document('Landing page', {\n  fields: {\n    title: Field.text('Title', {required: true}),\n    path: Field.path('Path', {readOnly: true, initialValue: ''})\n  }\n})",
+      "code": "import {Config, Field} from 'alinea'\n\nexport const LandingPage = Config.document('Landing page', {\n  fields: {\n    title: Field.text('Title', {required: true, width: 0.5}),\n    path: Field.path('Path', {readOnly: true, width: 0.5, initialValue: ''})\n  }\n})\n",
       "fileName": "entries/landing/LandingPage.schema.tsx",
       "language": "tsx",
       "compact": false
@@ -47,14 +65,14 @@
       "content": [
         {
           "_type": "text",
-          "text": "Then build the rendering component and infer its data type directly from that schema."
+          "text": "Then we set up the Page-component itself. We define this as a server component and make it responsible for fetching the required data from the CMS. Notice we defined the LandingPage schema as a document, which means it automatically receives various metadata fields. We fetch this from the CMS to properly implement a generateMetadata function."
         }
       ]
     },
     {
       "_type": "CodeBlock",
       "_id": "3AOUDOgAFF32REsMW4F1kxhQqG3",
-      "code": "// entries/landing/LandingPage.tsx\nimport {Infer} from 'alinea'\nimport {LandingPage} from './LandingPage.schema'\n\ntype LandingData = Infer<typeof LandingPage>\n\nexport function LandingPageView({page}: {page: LandingData}) {\n  return <h1>{page.title}</h1>\n}",
+      "code": "import type {Metadata} from 'next'\nimport {notFound} from 'next/navigation'\nimport {cms} from '@/cms'\nimport {LandingPage} from './LandingPage.schema'\n\nexport async function LandingPageView() {\n  const page = await cms.get({url: '/', type: LandingPage})\n  if (!page) notFound()\n\n  return (\n    <main>\n      <h1>{page.title}</h1>\n    </main>\n  )\n}\n\nexport async function generateMetadata(): Promise<Metadata> {\n  const page = await cms.get({url: '/', type: LandingPage})\n  if (!page) return {}\n\n  return {\n    title: page.metadata.title || page.title,\n    description: page.metadata?.description,\n    openGraph: {\n      title: page.metadata.openGraph.title || page.metadata.title || page.title,\n      description: page.metadata.openGraph.description || page.metadata?.description,\n      images: page.metadata?.openGraph.image\n        ? [page.metadata?.openGraph.image.src]\n        : undefined\n    }\n  }\n}\n",
       "fileName": "entries/landing/LandingPage.tsx",
       "language": "tsx",
       "compact": false
@@ -65,14 +83,14 @@
       "content": [
         {
           "_type": "text",
-          "text": "Register the landing schema in cms.tsx and seed the initial homepage entry."
+          "text": "Register the landing schema in the cms.tsx and (optionally) seed the initial homepage entry."
         }
       ]
     },
     {
       "_type": "CodeBlock",
       "_id": "3AONCAa2Rl2v6v1rbhieBd2wvdb",
-      "code": "// cms.tsx\nimport {Config} from 'alinea'\nimport {createCMS} from 'alinea/next'\nimport {LandingPage} from '@/entries/landing/LandingPage.schema'\n\nexport const cms = createCMS({\n  schema: {LandingPage},\n  workspaces: {\n    main: Config.workspace('Main', {\n      source: 'content',\n      mediaDir: 'public',\n      roots: {\n        pages: Config.root('Pages', {\n          contains: ['LandingPage'],\n          children: {\n            index: Config.page({\n              type: LandingPage,\n              fields: {\n                title: 'Welcome',\n                path: ''\n              }\n            })\n          }\n        }),\n        media: Config.media()\n      }\n    })\n  },\n  handlerUrl: '/api/cms',\n  dashboardFile: 'admin.html',\n  preview: true\n})",
+      "code": "// cms.tsx\nimport {Config} from 'alinea'\nimport {createCMS} from 'alinea/next'\nimport {LandingPage} from '@/entries/landing/LandingPage.schema'\n\nexport const cms = createCMS({\n  schema: {LandingPage},\n  workspaces: {\n    main: Config.workspace('Main', {\n      source: 'content',\n      mediaDir: 'public',\n      roots: {\n        pages: Config.root('Pages', {\n          contains: ['LandingPage'],\n          children: {\n            // Optionally seed this page, alternatively you can simply create the page from the CMS directly\n            index: Config.page({\n              type: LandingPage,\n              fields: {\n                title: 'Welcome',\n                path: ''\n              }\n            })\n          }\n        }),\n        media: Config.media()\n      }\n    })\n  },\n  baseUrl: {\n    development: 'http://localhost:3000'\n  },\n  handlerUrl: '/api/cms',\n  dashboardFile: 'admin.html',\n  preview: true\n})",
       "fileName": "cms.tsx",
       "language": "tsx",
       "compact": false
@@ -83,25 +101,95 @@
       "content": [
         {
           "_type": "text",
-          "text": "Finally, fetch that homepage entry in the route and pass it to the landing view."
+          "text": "Finally, we implement the page.tsx and layout.tsx files in our app folder to fully wire this site up like a standard Next.js project. Notice we added the previews widget to the root layout, this will activate live previews for content editors."
         }
       ]
     },
     {
       "_type": "CodeBlock",
       "_id": "3AONC9dl0liqkbFKz98iCvPT083",
-      "code": "// app/page.tsx\nimport {cms} from '@/cms'\nimport {LandingPageView} from '@/entries/landing/LandingPage'\n\nexport default async function Page() {\n  const page = await cms.get({url: '/'})\n  return <LandingPageView page={page} />\n}",
+      "code": "import {LandingPageView} from '@/entries/landing/LandingPage'\n\nexport {generateMetadata} from '@/entries/landing/LandingPage'\n\nexport default function Page() {\n  return <LandingPageView />\n}\n",
       "fileName": "app/page.tsx",
       "language": "tsx",
       "compact": false
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AnwTjJc907Wdxzne9oVGaVjCny",
+      "code": "import type {Metadata} from 'next'\nimport {cms} from '@/cms'\n\nexport default function RootLayout({children}: {children: React.ReactNode}) {\n  return (\n    <html lang=\"en\">\n      <body>\n        {children}\n        <cms.previews widget />\n      </body>\n    </html>\n  )\n}",
+      "fileName": "app/layout.tsx",
+      "language": "tsx"
+    },
+    {
+      "_type": "NoticeBlock",
+      "_id": "3Anz9HhlIGXj1yRUTTnA7o2E362",
+      "level": "info",
+      "body": [
+        {
+          "_type": "paragraph",
+          "content": [
+            {
+              "_type": "text",
+              "text": "Upon completion of these steps, you should have a minimal working website with these verifiable features:"
+            }
+          ]
+        },
+        {
+          "_type": "bulletList",
+          "content": [
+            {
+              "_type": "listItem",
+              "content": [
+                {
+                  "_type": "paragraph",
+                  "content": [
+                    {
+                      "_type": "text",
+                      "text": "Upon starting your CMS, a single page entry representing your landing page is present."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "_type": "listItem",
+              "content": [
+                {
+                  "_type": "paragraph",
+                  "content": [
+                    {
+                      "_type": "text",
+                      "text": "Live previews are enabled, when editing the title of your landing page the previewed page should reflect these any changes."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "_type": "listItem",
+              "content": [
+                {
+                  "_type": "paragraph",
+                  "content": [
+                    {
+                      "_type": "text",
+                      "text": "Wired up metadata: try navigating to the metadata tab and adjusting any of the content. "
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "metadata": {
     "title": "",
     "description": "",
     "openGraph": {
-      "title": "",
       "image": {},
+      "title": "",
       "description": ""
     }
   }
