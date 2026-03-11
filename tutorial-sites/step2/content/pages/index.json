@@ -15,7 +15,7 @@
           "content": [
             {
               "_type": "text",
-              "text": "Test with "
+              "text": "Rich text with "
             },
             {
               "_type": "text",
@@ -29,6 +29,39 @@
             {
               "_type": "text",
               "text": ". "
+            }
+          ]
+        },
+        {
+          "_type": "bulletList",
+          "content": [
+            {
+              "_type": "listItem",
+              "content": [
+                {
+                  "_type": "paragraph",
+                  "content": [
+                    {
+                      "_type": "text",
+                      "text": "Bullet1"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "_type": "listItem",
+              "content": [
+                {
+                  "_type": "paragraph",
+                  "content": [
+                    {
+                      "_type": "text",
+                      "text": "Bullet2"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -48,30 +81,22 @@
     {
       "_id": "3AObbasdETITnioFgCncfjSJT77",
       "_index": "a2",
-      "_type": "GalleryBlock",
-      "images": [
-        {
-          "_id": "3AObcdfLwDVfk7klQqdDayqE9An",
-          "_index": "a0",
-          "_type": "image",
-          "_entry": "3AObazssY5ER6VOt1bsIuXztLvb"
-        },
-        {
-          "_id": "3AObcev2dffnSw2qGfDiWiVGZBW",
-          "_index": "a1",
-          "_type": "image",
-          "_entry": "3AObcMsrebXMdxbWwZLeVXPPP3U"
-        }
-      ]
+      "_type": "WeatherBlock",
+      "title": "Current weather",
+      "region": "Brussels"
     }
   ],
   "metadata": {
-    "title": "",
-    "description": "",
+    "title": "Regular metatitle",
+    "description": "Regular meta description.",
     "openGraph": {
-      "image": {},
-      "title": "",
-      "description": ""
+      "image": {
+        "_id": "3AObfLUJV5AhaR7EmGwj1lGlU10",
+        "_type": "image",
+        "_entry": "3AObazssY5ER6VOt1bsIuXztLvb"
+      },
+      "title": "OG title",
+      "description": "OG description"
     }
   }
 }
