@@ -130,7 +130,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3Bstep2ImageSchema0000000001",
-      "code": "import {Config, Field} from 'alinea'\n\nexport const ImageBlock = Config.type('Image block', {\n  fields: {\n    image: Field.image('Image', {required: true}),\n    alt: Field.text('Alt text')\n  }\n})",
+      "code": "import {Config, Field} from 'alinea'\n\nexport const ImageBlock = Config.type('Image block', {\n  fields: {\n    image: Field.image('Image', {required: true, width: 0.5}),\n    alt: Field.text('Alt text', {width: 0.5})\n  }\n})\n",
       "fileName": "blocks/image/ImageBlock.schema.tsx",
       "language": "tsx",
       "compact": false
@@ -181,7 +181,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3Bstep2WeatherSchema00000001",
-      "code": "import {Config, Field} from 'alinea'\n\nexport const WeatherBlock = Config.type('Weather block', {\n  fields: {\n    title: Field.text('Title', {required: true}),\n    region: Field.text('Region', {required: true})\n  }\n})",
+      "code": "import {Config, Field} from 'alinea'\n\nexport const WeatherBlock = Config.type('Weather block', {\n  fields: {\n    title: Field.text('Title', {required: true, width: 0.5}),\n    region: Field.text('Region', {\n      required: true,\n      width: 0.5,\n      help: 'City or region name, for example: Brussels or New York'\n    })\n  }\n})",
       "fileName": "blocks/weather/WeatherBlock.schema.tsx",
       "language": "tsx",
       "compact": false
