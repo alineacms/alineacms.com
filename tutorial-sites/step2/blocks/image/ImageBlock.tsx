@@ -2,7 +2,7 @@ import type {Infer} from 'alinea'
 import Image from 'next/image'
 import type {ImageBlock} from './ImageBlock.schema'
 
-type ImageBlockData = Infer<typeof ImageBlock>
+type ImageBlockData = Infer.ListItem<typeof ImageBlock>
 
 export function ImageBlockView({block}: {block: ImageBlockData}) {
   if (!block.image) return null

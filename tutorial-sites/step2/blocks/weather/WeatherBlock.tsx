@@ -1,7 +1,8 @@
 import type {Infer} from 'alinea'
-import {WeatherBlock} from './WeatherBlock.schema'
+import {unstable_cacheLife as cacheLife} from 'next/cache'
+import type {WeatherBlock} from './WeatherBlock.schema'
 
-type WeatherBlockData = Infer<typeof WeatherBlock>
+type WeatherBlockData = Infer.ListItem<typeof WeatherBlock>
 
 type GeocodingResponse = {
   results?: Array<{
@@ -45,9 +46,11 @@ const weatherCodeLabels: Record<number, string> = {
 }
 
 async function getCurrentWeather(region: string) {
+  'use cache'
+  cacheLife({stale: 900, revalidate: 900, expire: 900})
+
   const geocoding = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(region)}&count=1`,
-    {next: {revalidate: 900}}
+    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(region)}&count=1`
   )
   if (!geocoding.ok) return null
 
@@ -56,8 +59,7 @@ async function getCurrentWeather(region: string) {
   if (!result) return null
 
   const forecast = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${result.latitude}&longitude=${result.longitude}&current=temperature_2m,weather_code&timezone=auto`,
-    {next: {revalidate: 900}}
+    `https://api.open-meteo.com/v1/forecast?latitude=${result.latitude}&longitude=${result.longitude}&current=temperature_2m,weather_code&timezone=auto`
   )
   if (!forecast.ok) return null
 
@@ -65,10 +67,14 @@ async function getCurrentWeather(region: string) {
   if (!forecastData.current) return null
 
   return {
-    location: result.country ? `${result.name}, ${result.country}` : result.name,
+    location: result.country
+      ? `${result.name}, ${result.country}`
+      : result.name,
     temperature: forecastData.current.temperature_2m,
     unit: forecastData.current_units?.temperature_2m ?? '°C',
-    summary: weatherCodeLabels[forecastData.current.weather_code ?? -1] ?? 'Current weather'
+    summary:
+      weatherCodeLabels[forecastData.current.weather_code ?? -1] ??
+      'Current weather'
   }
 }
 

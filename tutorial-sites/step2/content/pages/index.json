@@ -19,7 +19,7 @@
             },
             {
               "_type": "text",
-              "text": "bold text",
+              "text": "bold styling, ",
               "marks": [
                 {
                   "_type": "bold"
@@ -28,7 +28,40 @@
             },
             {
               "_type": "text",
-              "text": ". "
+              "text": "an "
+            },
+            {
+              "_type": "text",
+              "text": "internal",
+              "marks": [
+                {
+                  "_type": "link",
+                  "_id": "3Aq47o2qHBrk6wSnHr8bBAocNQM",
+                  "_entry": "3AObPZG4JKh7YBgJ1aEbonntdos",
+                  "_link": "entry"
+                }
+              ]
+            },
+            {
+              "_type": "text",
+              "text": " or an "
+            },
+            {
+              "_type": "text",
+              "text": "external",
+              "marks": [
+                {
+                  "_type": "link",
+                  "_id": "3Aq4fPuTDMAzxdvWJSLAdbhckq8",
+                  "_link": "url",
+                  "href": "https://www.google.be",
+                  "target": "_blank"
+                }
+              ]
+            },
+            {
+              "_type": "text",
+              "text": " link."
             }
           ]
         },
@@ -88,7 +121,7 @@
   ],
   "metadata": {
     "title": "Regular metatitle",
-    "description": "Regular meta description.",
+    "description": "",
     "openGraph": {
       "image": {
         "_id": "3AObfLUJV5AhaR7EmGwj1lGlU10",
