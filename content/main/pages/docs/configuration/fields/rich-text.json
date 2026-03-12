@@ -18,7 +18,7 @@
     {
       "_type": "CodeBlock",
       "_id": "268iODr7pOAG2BeDXXfDEvDZYfr",
-      "code": "import {Field} from 'alinea'\n\nField.richText('My rich text field', {\n  schema: {\n    CodeBlock,\n    ImageBlock\n  }\n})",
+      "code": "import {Field} from 'alinea'\n\nField.richText('Rich Text')\nField.richText('Extended with inline schema(s)', {\n  schema: {\n    ImageBlock\n  }\n})\nconst ImageBlock = Config.type('Image', {\n  fields: {image: Field.image('Image', {inline: true})}\n})",
       "fileName": "",
       "language": "",
       "compact": false
@@ -26,7 +26,7 @@
     {
       "_type": "ExampleBlock",
       "_id": "EuUkPtwTcHiQweiT_zZZI",
-      "code": "import {Config, Field} from 'alinea'\n\nexport default Config.type('Rich Text field', {\n  fields: {\n    richText: Field.richText('My rich text field', {\n      initialValue: [\n        {_type: 'heading', level: 1, content: [\n          {_type: 'text', text: \"Hello world\"}\n        ]},\n        {_type: 'paragraph', content: [\n          {_type: 'text', text: \"A paragraph follows\"}\n        ]}   \n      ]\n    })\n  }\n})\n "
+      "code": "import {Config, Field} from 'alinea'\n\nconst ImageBlock = Config.type('Image', {\n  fields: {image: Field.image('Image', {inline: true})}\n})\n\nexport default Config.type('Rich Text field', {\n  fields: {\n    basic: Field.richText('Rich Text', {\n      initialValue: [\n        {_type: 'heading', level: 1, content: [\n          {_type: 'text', text: \"Hello world\"}\n        ]},\n        {_type: 'paragraph', content: [\n          {_type: 'text', text: \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\"}\n        ]}   \n      ]\n    }),\n    richText: Field.richText('Extended with inline schema(s)', {\n      schema: {\n        ImageBlock\n      },\n      initialValue: [\n        {_type: 'paragraph', content: [\n          {_type: 'text', text: \"The “Insert block” option appears when you press Enter to create a new line.\"}\n        ]}   \n      ]\n    })\n  }\n})\n "
     },
     {
       "_type": "heading",
@@ -207,7 +207,6 @@
     "title": "Rich Text field - Alinea CMS",
     "description": "",
     "openGraph": {
-      "siteName": "",
       "image": {},
       "title": "",
       "description": ""

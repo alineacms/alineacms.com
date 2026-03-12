@@ -29,7 +29,7 @@
     {
       "_type": "CodeBlock",
       "_id": "267QyzM4851hQU1DihfoV3fSIFg",
-      "code": "import {Config, Field} from 'alinea'\n\nConfig.type('Blog', {\n  contains: ['BlogPost'],\n  fields: {\n    title: Field.text('Title', {width: 0.5}),\n    path: Field.path('Path', {width: 0.5})\n  }\n})",
+      "code": "import {Config, Field} from 'alinea'\n\nConfig.type('Blog', {\n  contains: ['BlogPost'],\n  fields: {\n    title: Field.text('Title', {required: true, width: 0.5}),\n    path: Field.path('Path', {required: true, width: 0.5})\n  }\n})",
       "fileName": "",
       "language": "",
       "compact": false
