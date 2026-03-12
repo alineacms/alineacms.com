@@ -49,26 +49,6 @@ export const cms = createCMS({
                 title: 'Blog',
                 path: 'blog',
                 intro: 'Latest posts'
-              },
-              children: {
-                'hello-world': Config.page({
-                  type: PostPage,
-                  fields: {
-                    title: 'Hello world',
-                    path: 'hello-world',
-                    excerpt: 'My first post',
-                    body: 'Welcome to the blog'
-                  }
-                }),
-                'second-post': Config.page({
-                  type: PostPage,
-                  fields: {
-                    title: 'Second post',
-                    path: 'second-post',
-                    excerpt: 'Another seeded post',
-                    body: 'This post enables previous/next post navigation.'
-                  }
-                })
               }
             })
           }

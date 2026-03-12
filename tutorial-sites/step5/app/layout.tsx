@@ -4,7 +4,7 @@ import {SiteLayout as SiteLayoutEntry} from '../entries/settings/SiteLayout.sche
 
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const settings = await cms.get({
-    root: cms.workspaces.main.settings,
+    root: cms.workspaces.main.globals,
     type: SiteLayoutEntry
   })
 

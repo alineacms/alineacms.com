@@ -15,11 +15,18 @@
           "content": [
             {
               "_type": "text",
-              "text": "Step 4 adds a fixed /blog route with child posts."
+              "text": "Step 4 builds on step 3 and adds a blog section with nested posts."
             }
           ]
         }
       ]
+    },
+    {
+      "_id": "3Bstep4WeatherSeed000000000",
+      "_index": "a1",
+      "_type": "WeatherBlock",
+      "title": "Current weather",
+      "region": "Brussels"
     }
   ],
   "metadata": {

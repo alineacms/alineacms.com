@@ -1,9 +1,20 @@
-import {Infer} from 'alinea'
-import {ImageBlock} from './ImageBlock.schema'
+import type {Infer} from 'alinea'
+import Image from 'next/image'
+import type {ImageBlock} from './ImageBlock.schema'
 
-type ImageBlockData = Infer<typeof ImageBlock>
+type ImageBlockData = Infer.ListItem<typeof ImageBlock>
 
 export function ImageBlockView({block}: {block: ImageBlockData}) {
-  const src = typeof block.image === 'string' ? block.image : block.image?.src || ''
-  return src ? <img src={src} alt={block.alt || ''} /> : null
+  if (!block.image) return null
+
+  const {src, width, height} = block.image
+  return (
+    <Image
+      src={src}
+      width={width}
+      height={height}
+      alt={block.alt || ''}
+      style={{width: '300px', height: 'auto'}}
+    />
+  )
 }

@@ -96,7 +96,7 @@
     {
       "_type": "CodeBlock",
       "_id": "3AONylyqe1NxVsqSoHXkI14ZVIb",
-      "code": "app/\n├ page.tsx\n╰ layout.tsx\n\nentries/\n├ landing/\n│ ├ LandingPage.tsx\n│ ╰ LandingPage.schema.tsx\n╰ settings/\n  ├ SiteLayout.tsx\n  ╰ SiteLayout.schema.tsx\n\nblocks/\n├ text/\n│ ├ TextBlock.tsx\n│ ╰ TextBlock.schema.tsx\n├ image/\n│ ├ ImageBlock.tsx\n│ ╰ ImageBlock.schema.tsx\n╰ weather/\n  ├ WeatherBlock.tsx\n  ╰ WeatherBlock.schema.tsx\n\ncms.tsx",
+      "code": "app/\n├ page.tsx\n╰ layout.tsx\n\nentries/\n├ landing/\n│ ╰ ...\n╰ settings/\n  ├ SiteLayout.tsx\n  ╰ SiteLayout.schema.tsx\n\nblocks/\n╰ ...\n\ncms.tsx",
       "fileName": "project structure",
       "language": "",
       "compact": false

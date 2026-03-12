@@ -1,7 +1,7 @@
-import {Infer} from 'alinea'
-import {SiteLayout as SiteLayoutEntry} from './SiteLayout.schema'
+import type {Infer} from 'alinea'
+import type {SiteLayout as SiteLayoutEntry} from './SiteLayout.schema'
 
-type SiteLayoutProps = Infer<typeof SiteLayoutEntry>
+type SiteLayoutProps = Infer.Entry<typeof SiteLayoutEntry>
 
 export function SiteHeader({settings}: {settings: SiteLayoutProps}) {
   return <header>{settings.headerText}</header>

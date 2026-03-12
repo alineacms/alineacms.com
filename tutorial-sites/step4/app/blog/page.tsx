@@ -1,20 +1,7 @@
-import {Entry} from 'alinea/core/Entry'
-import {cms} from '../../cms'
-import {BlogPageView} from '../../entries/blog/BlogPage'
-import {BlogPage} from '../../entries/blog/BlogPage.schema'
+import {BlogView} from '@/entries/blog/Blog'
 
-export default async function BlogRoute() {
-  const page = await cms.get({url: '/blog', type: BlogPage})
-  if (!page) return <main>No blog page found</main>
+export {generateMetadata} from '@/entries/blog/Blog'
 
-  const posts = await cms.find({
-    parentId: page._id,
-    select: {
-      id: Entry.id,
-      title: Entry.title,
-      url: Entry.url
-    }
-  })
-
-  return <BlogPageView page={page} posts={posts} />
+export default function BlogRoute() {
+  return <BlogView />
 }
