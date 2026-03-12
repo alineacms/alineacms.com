@@ -1,19 +1,23 @@
-import {cms} from '../cms'
-import {SiteFooter, SiteHeader} from '../entries/settings/SiteLayout'
-import {SiteLayout as SiteLayoutEntry} from '../entries/settings/SiteLayout.schema'
+import {cms} from '@/cms'
+import {SiteFooter, SiteHeader} from '@/entries/settings/SiteLayout'
+import {SiteLayout} from '@/entries/settings/SiteLayout.schema'
 
-export default async function RootLayout({children}: {children: React.ReactNode}) {
+export default async function RootLayout({
+  children
+}: {
+  children: React.ReactNode
+}) {
   const settings = await cms.get({
-    root: cms.workspaces.main.globals,
-    type: SiteLayoutEntry
+    root: cms.workspaces.main.settings,
+    type: SiteLayout
   })
 
   return (
-    <html lang='en'>
+    <html lang="en">
       <body>
-        {settings ? <SiteHeader settings={settings} /> : null}
+        <SiteHeader settings={settings} />
         {children}
-        {settings ? <SiteFooter settings={settings} /> : null}
+        <SiteFooter settings={settings} />
       </body>
     </html>
   )

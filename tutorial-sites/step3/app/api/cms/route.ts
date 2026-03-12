@@ -1,5 +1,5 @@
 import {createHandler} from 'alinea/next'
-import {cms} from '../../../cms'
+import {cms} from '@/cms'
 
 const handler = createHandler({cms})
 

@@ -227,7 +227,7 @@
       "content": [
         {
           "_type": "text",
-          "text": "Update the step 1 LandingPage view. Keep it as a server component that fetches the page and generates metadata, then render each block variant based on _type. We also illustrate how to generate a fall-back metadata description. "
+          "text": "Update the step landing page view from the previous step. Keep it as a server component that fetches the page and generates metadata, then render each block variant based on _type. We also illustrate how to generate a fall-back metadata description. "
         }
       ]
     },
