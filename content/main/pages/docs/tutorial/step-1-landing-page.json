@@ -10,7 +10,7 @@
       "content": [
         {
           "_type": "text",
-          "text": "We are gonna working towards setting up a welcome page, served on the root domain of the website. The page will simply print the title of the page, which can be adjusted in the CMS."
+          "text": "We're going to work towards setting up a welcome page, served on the root domain of the website. This page will simply print the title of the page, which can be adjusted in the CMS."
         }
       ]
     },
