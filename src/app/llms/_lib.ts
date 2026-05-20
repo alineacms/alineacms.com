@@ -24,7 +24,8 @@ function asString(value: unknown): string {
 }
 
 function normalizeText(input: string) {
-  return input.replace(/\r\n?/g, '\n')
+  // Keep existing llms-full.txt behavior; no text normalization is applied.
+  return input
 }
 
 function renderInline(

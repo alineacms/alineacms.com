@@ -9,7 +9,7 @@ export const runtime = 'nodejs'
 
 type RouteContext = {
   params: Promise<{
-    slug: Array<string>
+    slug?: Array<string>
   }>
 }
 
