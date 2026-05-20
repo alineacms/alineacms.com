@@ -1,10 +1,39 @@
-import {getDocsEntries, getEntryTitle, toLlmsMdPath} from '@/app/llms/_lib'
+import {
+  getEntryTitle,
+  getLlmsRenderData,
+  renderDocBody,
+  toLlmsMdPath
+} from '@/app/llms/_lib'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-static'
 
+function getEntryDescription(
+  entry: Parameters<typeof getEntryTitle>[0],
+  entryMap: Map<string, {url: string}>,
+  mediaMap: Map<string, {title: string; location: string}>
+) {
+  const body = renderDocBody(entry, entryMap, mediaMap)
+  if (!body) return ''
+  const line = body
+    .split('\n')
+    .map(line => line.trim())
+    .find(
+      line =>
+        line &&
+        !line.startsWith('#') &&
+        !line.startsWith('```') &&
+        !line.startsWith('File:') &&
+        !line.startsWith('Variant:') &&
+        !line.startsWith('Framework:')
+    )
+  if (!line) return ''
+  const firstSentence = line.match(/^(.*?[.!?])(?:\s|$)/)?.[1] || line
+  return firstSentence.trim()
+}
+
 export async function GET() {
-  const docsEntries = await getDocsEntries()
+  const {docsEntries, entryMap, mediaMap} = await getLlmsRenderData()
   const output: Array<string> = []
   output.push('# Alinea CMS Docs')
   output.push('')
@@ -18,7 +47,12 @@ export async function GET() {
     .sort((a, b) => a.url.localeCompare(b.url))
     .forEach(entry => {
       const title = getEntryTitle(entry)
-      output.push(`- [${title}](${toLlmsMdPath(entry.url)})`)
+      const description = getEntryDescription(entry, entryMap, mediaMap)
+      output.push(
+        description
+          ? `- [${title}](${toLlmsMdPath(entry.url)}): ${description}`
+          : `- [${title}](${toLlmsMdPath(entry.url)})`
+      )
     })
 
   output.push('')
