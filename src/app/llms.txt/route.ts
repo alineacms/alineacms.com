@@ -17,7 +17,7 @@ function getEntryDescription(
   if (!body) return ''
   const line = body
     .split('\n')
-    .map(line => line.trim())
+    .map(textLine => textLine.trim())
     .find(
       line =>
         line &&
@@ -28,7 +28,8 @@ function getEntryDescription(
         !line.startsWith('Framework:')
     )
   if (!line) return ''
-  const firstSentence = line.match(/^(.*?[.!?])(?:\s|$)/)?.[1] || line
+  const firstSentence =
+    line.match(/^(.*?[.!?])(?:\s|[\)\]\"']|$)/)?.[1] || line
   return firstSentence.trim()
 }
 
