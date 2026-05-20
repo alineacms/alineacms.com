@@ -1,21 +1,28 @@
+import {getDocsEntries, getEntryTitle, siteUrl, toLlmsMdPath} from '@/app/llms/_lib'
+
+export const runtime = 'nodejs'
 export const dynamic = 'force-static'
 
-const content = `# Alinea CMS
+export async function GET() {
+  const docsEntries = await getDocsEntries()
+  const output: Array<string> = []
+  output.push('# Alinea CMS Docs')
+  output.push('')
+  output.push(`Full documentation: ${siteUrl}/llms-full.txt`)
+  output.push('')
+  output.push('## Pages')
+  output.push('')
 
-> Content management for developers.
+  docsEntries
+    .slice()
+    .sort((a, b) => a.url.localeCompare(b.url))
+    .forEach(entry => {
+      const title = getEntryTitle(entry)
+      output.push(`- [${title}](${siteUrl}${toLlmsMdPath(entry.url)})`)
+    })
 
-See the complete documentation corpus at: https://alineacms.com/llms-full.txt
-
-## Key links
-
-- Docs: https://alineacms.com/docs
-- Blog: https://alineacms.com/blog
-- Changelog: https://alineacms.com/changelog
-- Repository: https://github.com/alineacms/alineacms.com
-`
-
-export function GET() {
-  return new Response(content, {
+  output.push('')
+  return new Response(output.join('\n'), {
     headers: {
       'content-type': 'text/plain; charset=utf-8'
     }
