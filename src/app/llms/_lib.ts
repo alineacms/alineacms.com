@@ -24,7 +24,7 @@ function asString(value: unknown): string {
 }
 
 function normalizeText(input: string) {
-  return input
+  return input.replace(/\r\n?/g, '\n')
 }
 
 function renderInline(

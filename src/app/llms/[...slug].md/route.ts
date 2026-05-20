@@ -13,10 +13,34 @@ type RouteContext = {
   }>
 }
 
+function decodeSlug(slug: Array<string>) {
+  const segments: Array<string> = []
+  for (const segment of slug) {
+    let decoded = ''
+    try {
+      decoded = decodeURIComponent(segment)
+    } catch {
+      return null
+    }
+    if (
+      !decoded ||
+      decoded === '.' ||
+      decoded === '..' ||
+      decoded.includes('/') ||
+      decoded.includes('\\')
+    ) {
+      return null
+    }
+    segments.push(decoded)
+  }
+  return segments
+}
+
 export async function GET(_request: Request, context: RouteContext) {
   const params = await context.params
-  const slug = params.slug ?? []
-  const url = `/${slug.map(decodeURIComponent).join('/')}`
+  const decodedSlug = decodeSlug(params.slug ?? [])
+  if (!decodedSlug) return new Response('Not found', {status: 404})
+  const url = `/${decodedSlug.join('/')}`
   if (!url.startsWith('/docs')) {
     return new Response('Not found', {status: 404})
   }
