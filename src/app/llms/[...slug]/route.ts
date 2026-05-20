@@ -14,13 +14,19 @@ type RouteContext = {
 }
 
 function decodeSlug(slug: Array<string>) {
+  if (slug.length === 0) return null
   const segments: Array<string> = []
-  for (const segment of slug) {
+  for (let index = 0; index < slug.length; index++) {
+    const segment = slug[index]
     let decoded = ''
     try {
       decoded = decodeURIComponent(segment)
     } catch {
       return null
+    }
+    if (index === slug.length - 1) {
+      if (!decoded.endsWith('.md')) return null
+      decoded = decoded.slice(0, -3)
     }
     if (
       !decoded ||
