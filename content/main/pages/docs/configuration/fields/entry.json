@@ -38,46 +38,6 @@
       "content": [
         {
           "_type": "text",
-          "text": "`max`"
-        }
-      ]
-    },
-    {
-      "_type": "paragraph",
-      "textAlign": "left",
-      "content": [
-        {
-          "_type": "text",
-          "text": "Limit the amount of rows in case of multiple links."
-        }
-      ]
-    },
-    {
-      "_type": "heading",
-      "level": 3,
-      "content": [
-        {
-          "_type": "text",
-          "text": "`defaultView`"
-        }
-      ]
-    },
-    {
-      "_type": "paragraph",
-      "textAlign": "left",
-      "content": [
-        {
-          "_type": "text",
-          "text": "Preset the UI to show rows or thumbnails (possible values: \"row\", \"thumb\")"
-        }
-      ]
-    },
-    {
-      "_type": "heading",
-      "level": 3,
-      "content": [
-        {
-          "_type": "text",
           "text": "`condition`"
         }
       ]
@@ -112,9 +72,29 @@
     {
       "_type": "CodeBlock",
       "_id": "2aiNY0EOVAiPH085iK0NelgMfhO",
-      "code": "import {Field, Query} from 'alinea'\n\nField.entry('Link to author', {\n  condition: {_type: 'Author'}\n})",
+      "code": "import {Field} from 'alinea'\n\nField.entry('Link to author', {\n  condition: {\n    _type: 'Author'\n  }\n})",
       "fileName": "",
       "language": ""
+    },
+    {
+      "_type": "heading",
+      "level": 3,
+      "content": [
+        {
+          "_type": "text",
+          "text": "`defaultView`"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Preset the UI to show rows or thumbnails (possible values: \"row\", \"thumb\")"
+        }
+      ]
     },
     {
       "_type": "heading",
@@ -139,7 +119,34 @@
     {
       "_type": "CodeBlock",
       "_id": "31uIXMVpPme7rebYzsJ4FOz59oH",
-      "code": "import {Field, Query} from 'alinea'\n\nField.entry('Link to author', {\n  location: {workspace: 'main', root: 'pages'\n})",
+      "code": "import {Field} from 'alinea'\n\nField.entry('Link to author', {\n  location: {\n    root: 'pages',\n    workspace: 'main'\n  }\n})",
+      "fileName": "",
+      "language": ""
+    },
+    {
+      "_type": "heading",
+      "level": 3,
+      "content": [
+        {
+          "_type": "text",
+          "text": "`max`"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "textAlign": "left",
+      "content": [
+        {
+          "_type": "text",
+          "text": "Limit the amount of rows in case of multiple links."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3F2GKxhpocJf8ZPxaLD6HBOUXot",
+      "code": "import {Field} from 'alinea'\n\nField.entry.multiple('Select up to 3 authors', {\n  max: 3\n})",
       "fileName": "",
       "language": ""
     }
