@@ -72,7 +72,7 @@
     {
       "_type": "CodeBlock",
       "_id": "2aiNY0EOVAiPH085iK0NelgMfhO",
-      "code": "import {Field} from 'alinea'\n\nField.entry('Link to author', {\n  condition: {\n    _type: 'Author'\n  }\n})",
+      "code": "import {Field} from 'alinea'\n\nField.entry('Link to author', {\n  condition: {\n    _type: 'Author'\n  }\n})\n\nField.entry('Link to author or writer', {\n  condition: {\n    _type: {\n      in: ['Author', 'Writer']\n    }\n  }\n})",
       "fileName": "",
       "language": ""
     },
