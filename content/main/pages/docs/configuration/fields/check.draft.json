@@ -27,7 +27,7 @@
     {
       "_type": "ExampleBlock",
       "_id": "2LfI_a2TA_L7QW2kK-nDa",
-      "code": "import {Config, Field} from 'alinea'\n\nexport default Config.type('Check field', {\n  fields: {\n    check: Field.check('Checkbox without label'),\n    checkDescription: Field.check('Lorem ipsum dolor sit amet', {\n      description: 'Checkbox with label & description'\n    })\n  }\n})"
+      "code": "import {Config, Field} from 'alinea'\n\nexport default Config.type('Check field', {\n  fields: {\n    check: Field.check('Checkbox without label'),\n    checkDescription: Field.check('Label ipsum dolor sit amet', {\n      description: 'Checkbox with label & description'\n    })\n  }\n})"
     }
   ],
   "metadata": {
