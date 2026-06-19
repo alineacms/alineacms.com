@@ -18,7 +18,7 @@
     {
       "_type": "CodeBlock",
       "_id": "28hu0MbpUcAOhWTWi954kRRNHcM",
-      "code": "import {Field} from 'alinea'\n\nField.check('Subscribe to the newsletter')",
+      "code": "import {Field} from 'alinea'\n\nField.check('Checkbox without label')\nField.check('Label ipsum dolor sit amet', {\n  description: 'Checkbox with label & description'\n})",
       "fileName": "",
       "language": "",
       "compact": true
