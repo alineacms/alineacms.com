@@ -26,14 +26,13 @@
     {
       "_type": "ExampleBlock",
       "_id": "2LfI_a2TA_L7QW2kK-nDa",
-      "code": "import {Config, Field} from 'alinea'\n\nexport default Config.type('Check field', {\n  fields: {\n    check: Field.check('Subscribe to the newsletter')\n  }\n})"
+      "code": "import {Config, Field} from 'alinea'\n\nexport default Config.type('Check field', {\n  fields: {\n    check: Field.check('Subscribe to the newsletter'),\n    checkDescription: Field.check('Label', {\n      description: 'Description lorem ipsum dolor sit amet'\n    })\n  }\n})"
     }
   ],
   "metadata": {
     "title": "Check field - Alinea CMS",
     "description": "",
     "openGraph": {
-      "siteName": "",
       "image": {},
       "title": "",
       "description": ""
