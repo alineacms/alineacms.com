@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/llms.txt',
+        destination: '/llms-full.txt',
+        permanent: true
+      },
+      {
         source: '/docs/fields/:path*',
         destination: '/docs/configuration/fields/:path*',
         permanent: true
