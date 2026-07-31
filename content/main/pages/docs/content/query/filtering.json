@@ -199,6 +199,41 @@
       "content": [
         {
           "_type": "text",
+          "text": "has ",
+          "marks": [
+            {
+              "_type": "bold"
+            }
+          ]
+        },
+        {
+          "_type": "text",
+          "text": "(Filtering within an object)"
+        }
+      ]
+    },
+    {
+      "_type": "paragraph",
+      "content": [
+        {
+          "_type": "text",
+          "text": "When a field holds an object, use has to filter on a property defined within that object."
+        }
+      ]
+    },
+    {
+      "_type": "CodeBlock",
+      "_id": "3AiHasObjPropFilterExample01",
+      "code": "filter: {myObject: {has: {prop: 123}}}",
+      "fileName": "",
+      "language": ""
+    },
+    {
+      "_type": "heading",
+      "level": 3,
+      "content": [
+        {
+          "_type": "text",
           "text": "Example"
         }
       ]
